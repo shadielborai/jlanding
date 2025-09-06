@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Jobesta is an AI-powered platform that helps you find the right job, enhance your profile, create tailored CVs and cover letters, and seamlessly track your applications.">
+    <meta name="keywords" content="job search, AI job search, CV builder, cover letter generator, job tracker, career platform">
+    <meta name="author" content="Jobesta">
+    <title>Jobesta - Land Your Dream Job Faster with AI</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Favicon -->
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav-wrapper">
+                <a href="index.html" class="logo">
+                    <span class="logo-bold">Job</span><span class="logo-light">esta</span>
+                </a>
+                <ul class="nav-menu">
+                    <li><a href="index.html#features" class="nav-link">Features</a></li>
+                    <li><a href="pricing.html" class="nav-link">Pricing</a></li>
+                    <li><a href="blog.html" class="nav-link">Blog</a></li>
+                    <li><a href="about.html" class="nav-link">About Us</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                    <li><a href="https://app.jobesta.com/login" class="btn btn-primary">Get Started</a></li>
+                </ul>
+                <div class="mobile-menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-left">
+                    <h1>Land Your Dream Job Faster with AI</h1>
+                    <p>Jobesta is an AI-powered platform that helps you find the right job, enhance your profile, create tailored CVs and cover letters, and seamlessly track your applications.</p>
+                    <a href="https://app.jobesta.com/login" class="btn btn-primary">Get Started</a>
+                </div>
+                <div class="hero-right">
+                    <!-- Chat Messages -->
+                    <div class="chat-messages" id="chatMessages">
+                        <!-- AI greeting (will change with each scene) -->
+                        <div class="chat-message assistant" id="aiGreeting">
+                            <div class="message-bubble assistant" id="aiGreetingText">
+                                Hello! How can I help you today?
+                            </div>
+                        </div>
+                        
+                        <!-- User message (will be populated by JS) -->
+                        <div class="chat-message user" id="userMessage" style="display: none;">
+                            <div class="message-bubble user" id="userMessageText"></div>
+                        </div>
+                        
+                        <!-- Typing indicator -->
+                        <div class="chat-message assistant" id="typingMessage" style="display: none;">
+                            <div class="typing-indicator">
+                                <div class="typing-dots">
+                                    <div class="typing-dot"></div>
+                                    <div class="typing-dot"></div>
+                                    <div class="typing-dot"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- AI response -->
+                        <div class="chat-message assistant" id="aiResponse" style="display: none;">
+                            <div class="message-bubble assistant" id="aiResponseText"></div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="section fade-in">
+        <div class="container">
+            <div class="section-content">
+                <div class="section-text">
+                    <h2>Discover The Most Relevant Jobs with AI-powered Search</h2>
+                    <p>Jobesta's AI-powered search connects you with jobs that perfectly match your qualifications and skills.</p>
+                    <a href="https://app.jobesta.com/login" class="btn btn-primary">Get Started</a>
+                </div>
+                <div class="section-image">
+                    [Job Search Placeholder]
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section fade-in">
+        <div class="container">
+            <div class="section-content">
+                <div class="section-text">
+                    <h2>Generate Tailored CVs and Cover Letters in Seconds!</h2>
+                    <p>Generate ATS-friendly CVs and cover letters, tailored for any job</p>
+                    <a href="https://app.jobesta.com/login" class="btn btn-primary">Get Started</a>
+                </div>
+                <div class="section-image">
+                    [CV Generator Placeholder]
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section fade-in">
+        <div class="container">
+            <div class="section-content">
+                <div class="section-text">
+                    <h2>Let AI Perfect Your Professional Profile</h2>
+                    <p>Rely on AI to analyze your profile and suggest edits that make it more professional.</p>
+                    <a href="https://app.jobesta.com/login" class="btn btn-primary">Get Started</a>
+                </div>
+                <div class="section-image">
+                    [Profile Enhancement Placeholder]
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section fade-in">
+        <div class="container">
+            <div class="section-content">
+                <div class="section-text">
+                    <h2>Stay on Top of Every Application With Our Smart Job Tracker</h2>
+                    <p>Easily track every job application and keep all your documents organized in one place.</p>
+                    <a href="https://app.jobesta.com/login" class="btn btn-primary">Get Started</a>
+                </div>
+                <div class="section-image">
+                    [Job Tracker Placeholder]
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3><span style="font-weight: 900;">Job</span><span style="font-weight: 200;">esta</span></h3>
+                    <p>Land your dream job faster</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="blog.html">Blogs</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Compliance</h3>
+                    <ul class="footer-links">
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Newsletter</h3>
+                    <p>Stay updated with the latest job search tips and features</p>
+                    <form class="newsletter-form" id="newsletterForm">
+                        <input type="email" class="newsletter-input" placeholder="Enter your email" id="newsletterEmail">
+                        <button type="submit" class="newsletter-btn" id="newsletterBtn" disabled>Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 Jobesta, All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Typed.js -->
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    
+    <!-- Main JavaScript -->
+    <script src="js/main.js"></script>
+</body>
+</html>

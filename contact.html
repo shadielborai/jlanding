@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact Jobesta - Get in touch with our team for support or inquiries">
+    <meta name="keywords" content="contact jobesta, support, customer service, help">
+    <meta name="author" content="Jobesta">
+    <title>Contact - Jobesta</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Favicon -->
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav-wrapper">
+                <a href="index.html" class="logo">
+                    <span class="logo-bold">Job</span><span class="logo-light">esta</span>
+                </a>
+                <ul class="nav-menu">
+                    <li><a href="index.html#features" class="nav-link">Features</a></li>
+                    <li><a href="pricing.html" class="nav-link">Pricing</a></li>
+                    <li><a href="blog.html" class="nav-link">Blog</a></li>
+                    <li><a href="about.html" class="nav-link">About Us</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                    <li><a href="https://app.jobesta.com/login" class="btn btn-primary">Get Started</a></li>
+                </ul>
+                <div class="mobile-menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Content -->
+    <section class="page-content">
+        <div class="container">
+            <h1 class="text-center">Contact Us</h1>
+            <p class="text-center" style="font-size: 1.25rem; margin-bottom: 3rem;">
+                We're here to help! Reach out to us with any questions or feedback.
+            </p>
+            
+            <div style="max-width: 600px; margin: 0 auto;">
+                <form id="contactForm" style="background: var(--jobesta-gray-20); padding: 40px; border-radius: 12px;">
+                    <div style="margin-bottom: 25px;">
+                        <label for="name" style="display: block; margin-bottom: 8px; font-weight: 600;">Name *</label>
+                        <input type="text" id="name" name="name" required 
+                               style="width: 100%; padding: 12px; border: 1px solid var(--jobesta-gray-40); border-radius: 6px; font-size: 1rem;">
+                    </div>
+                    
+                    <div style="margin-bottom: 25px;">
+                        <label for="email" style="display: block; margin-bottom: 8px; font-weight: 600;">Email *</label>
+                        <input type="email" id="email" name="email" required 
+                               style="width: 100%; padding: 12px; border: 1px solid var(--jobesta-gray-40); border-radius: 6px; font-size: 1rem;">
+                    </div>
+                    
+                    <div style="margin-bottom: 25px;">
+                        <label for="subject" style="display: block; margin-bottom: 8px; font-weight: 600;">Subject *</label>
+                        <select id="subject" name="subject" required 
+                                style="width: 100%; padding: 12px; border: 1px solid var(--jobesta-gray-40); border-radius: 6px; font-size: 1rem; background: white;">
+                            <option value="">Select a subject</option>
+                            <option value="general">General Inquiry</option>
+                            <option value="support">Technical Support</option>
+                            <option value="billing">Billing Question</option>
+                            <option value="feature">Feature Request</option>
+                            <option value="partnership">Partnership Opportunity</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div style="margin-bottom: 25px;">
+                        <label for="message" style="display: block; margin-bottom: 8px; font-weight: 600;">Message *</label>
+                        <textarea id="message" name="message" rows="6" required 
+                                  style="width: 100%; padding: 12px; border: 1px solid var(--jobesta-gray-40); border-radius: 6px; font-size: 1rem; resize: vertical;"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary" style="width: 100%; padding: 15px;">
+                        Send Message
+                    </button>
+                </form>
+                
+                <div style="margin-top: 60px; text-align: center;">
+                    <h2>Other Ways to Reach Us</h2>
+                    <div style="margin-top: 30px;">
+                        <div style="margin-bottom: 20px;">
+                            <h3 style="color: var(--jobesta-blue); margin-bottom: 10px;">Email Support</h3>
+                            <p>support@jobesta.com</p>
+                        </div>
+                        <div style="margin-bottom: 20px;">
+                            <h3 style="color: var(--jobesta-blue); margin-bottom: 10px;">Business Inquiries</h3>
+                            <p>business@jobesta.com</p>
+                        </div>
+                        <div>
+                            <h3 style="color: var(--jobesta-blue); margin-bottom: 10px;">Response Time</h3>
+                            <p>We typically respond within 24-48 business hours</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3><span style="font-weight: 900;">Job</span><span style="font-weight: 200;">esta</span></h3>
+                    <p>Land your dream job faster</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="blog.html">Blogs</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Compliance</h3>
+                    <ul class="footer-links">
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Newsletter</h3>
+                    <p>Stay updated with the latest job search tips and features</p>
+                    <form class="newsletter-form" id="newsletterForm">
+                        <input type="email" class="newsletter-input" placeholder="Enter your email" id="newsletterEmail">
+                        <button type="submit" class="newsletter-btn" id="newsletterBtn" disabled>Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 Jobesta, All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Main JavaScript -->
+    <script src="js/main.js"></script>
+    <script>
+        // Contact form handler
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! We will get back to you soon.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
