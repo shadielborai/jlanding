@@ -1292,10 +1292,12 @@ a:hover {
     font-size: 0.65rem;
   }
   
-  /* Disable animation on mobile to avoid layout issues */
+  /* Keep animations but optimize for performance */
   .job-tracker-preview * {
-    transition: none !important;
-    transform: none !important;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-perspective: 1000px;
+    perspective: 1000px;
   }
 }
 
