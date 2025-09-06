@@ -279,8 +279,242 @@ window.addEventListener('scroll', () => {
     lastScroll = currentScroll;
 });
 
+// Job Search Chat (Section 2)
+function initJobSearchChat() {
+    const jobSearchUserMessage = document.getElementById('jobSearchUserMessage');
+    const jobSearchUserText = document.getElementById('jobSearchUserText');
+    const jobSearchTyping = document.getElementById('jobSearchTyping');
+    const jobSearchResponse = document.getElementById('jobSearchResponse');
+    const jobSearchResponseText = document.getElementById('jobSearchResponseText');
+    const jobListings = document.getElementById('jobListings');
+    
+    if (!jobSearchUserMessage) return;
+    
+    let chatAnimationPlayed = false;
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !chatAnimationPlayed) {
+                chatAnimationPlayed = true;
+                playJobSearchChat();
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.3 });
+    
+    const chatSection = document.getElementById('jobSearchChat');
+    if (chatSection) {
+        observer.observe(chatSection);
+    }
+    
+    function playJobSearchChat() {
+        const userQuery = "I need a job that perfectly matches my qualifications and skills, located in London";
+        
+        // Show and type user message
+        jobSearchUserMessage.style.display = 'flex';
+        let userText = '';
+        let userIndex = 0;
+        
+        function typeUserMessage() {
+            if (userIndex < userQuery.length) {
+                userText += userQuery[userIndex];
+                jobSearchUserText.textContent = userText;
+                userIndex++;
+                setTimeout(typeUserMessage, 30);
+            } else {
+                // Show typing indicator
+                setTimeout(() => {
+                    jobSearchTyping.style.display = 'flex';
+                    
+                    // Show AI response after delay
+                    setTimeout(() => {
+                        jobSearchTyping.style.display = 'none';
+                        jobSearchResponse.style.display = 'flex';
+                        
+                        const aiText = "Perfect! I found a job in London that matches your requirements:";
+                        let aiIndex = 0;
+                        let currentText = '';
+                        
+                        function typeAIResponse() {
+                            if (aiIndex < aiText.length) {
+                                currentText += aiText[aiIndex];
+                                jobSearchResponseText.textContent = currentText;
+                                aiIndex++;
+                                setTimeout(typeAIResponse, 20);
+                            } else {
+                                // Show job listings after typing
+                                setTimeout(() => {
+                                    jobListings.style.display = 'block';
+                                    jobListings.innerHTML = `
+                                        <div class="job-listing-item" style="opacity: 0; animation: fadeIn 0.5s ease forwards;">
+                                            <h4>Senior Fullstack Engineer</h4>
+                                            <div class="company">Google - London, UK</div>
+                                            <div class="description">Build scalable web applications using React and Node.js. Work with cross-functional teams to deliver innovative solutions.</div>
+                                            <button class="apply-btn">Apply</button>
+                                        </div>
+                                    `;
+                                }, 500);
+                            }
+                        }
+                        
+                        typeAIResponse();
+                    }, 1500);
+                }, 500);
+            }
+        }
+        
+        setTimeout(typeUserMessage, 500);
+    }
+}
+
+// Typing Effect for Section 4
+function initTypingEffect() {
+    const typingTitle = document.querySelector('.typing-title');
+    const typingDescription = document.querySelector('.typing-description');
+    
+    if (!typingTitle || !typingDescription) return;
+    
+    let typingAnimationPlayed = false;
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !typingAnimationPlayed) {
+                typingAnimationPlayed = true;
+                startTypingAnimation();
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.3 });
+    
+    const sectionWrapper = document.querySelector('.typing-section-wrapper');
+    if (sectionWrapper) {
+        observer.observe(sectionWrapper);
+    }
+    
+    function startTypingAnimation() {
+        const titleText = typingTitle.getAttribute('data-text');
+        const descriptionText = typingDescription.getAttribute('data-text');
+        
+        // Clear initial content
+        typingTitle.textContent = '';
+        typingDescription.textContent = '';
+        
+        // Type in the title and description elements
+        let titleIndex = 0;
+        let descIndex = 0;
+        
+        function typeTitle() {
+            if (titleIndex <= titleText.length) {
+                typingTitle.innerHTML = titleText.substring(0, titleIndex) + '<span class="typing-cursor"></span>';
+                titleIndex++;
+                setTimeout(typeTitle, 50);
+            } else {
+                // Remove cursor from title and start typing description
+                typingTitle.textContent = titleText;
+                setTimeout(typeDescription, 200);
+            }
+        }
+        
+        function typeDescription() {
+            if (descIndex <= descriptionText.length) {
+                typingDescription.innerHTML = descriptionText.substring(0, descIndex) + '<span class="typing-cursor"></span>';
+                descIndex++;
+                setTimeout(typeDescription, 30);
+            } else {
+                // Remove cursor after done
+                typingDescription.textContent = descriptionText;
+            }
+        }
+        
+        setTimeout(typeTitle, 500);
+    }
+}
+
+// Job Tracker Animation (Section 5)
+function initJobTrackerAnimation() {
+    const jobTrackerPreview = document.getElementById('jobTrackerPreview');
+    const movingCard = document.getElementById('movingCard');
+    const viewedCards = document.getElementById('viewedCards');
+    const appliedCards = document.getElementById('appliedCards');
+    
+    if (!jobTrackerPreview || !movingCard) return;
+    
+    let animationPlayed = false;
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !animationPlayed) {
+                animationPlayed = true;
+                playTrackerAnimation();
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.3 });
+    
+    observer.observe(jobTrackerPreview);
+    
+    function playTrackerAnimation() {
+        setTimeout(() => {
+            // Get the exact position of the placeholder in the second row of Applied column
+            const placeholder = document.getElementById('placeholderCard');
+            if (!placeholder) return;
+            
+            // Temporarily make placeholder visible ONLY to calculate position (but keep it invisible)
+            placeholder.style.height = 'auto';
+            placeholder.style.margin = '';
+            placeholder.style.padding = '15px';
+            placeholder.style.visibility = 'hidden'; // Hidden but takes up space for positioning
+            
+            // Get positions for horizontal animation
+            const startRect = movingCard.getBoundingClientRect();
+            const endRect = placeholder.getBoundingClientRect();
+            
+            // Calculate ONLY horizontal movement (same row level)
+            const deltaX = endRect.left - startRect.left;
+            const deltaY = 0; // Force no vertical movement
+            
+            // Apply pure horizontal transform animation
+            movingCard.style.position = 'relative';
+            movingCard.style.zIndex = '100';
+            movingCard.style.transition = 'all 1.5s cubic-bezier(0.4, 0, 0.2, 1)';
+            movingCard.style.transform = `translateX(${deltaX}px) scale(1.05)`;
+            movingCard.style.boxShadow = '0 15px 30px rgba(0, 0, 0, 0.2)';
+            
+            setTimeout(() => {
+                // Reset styles and replace placeholder
+                movingCard.style.transition = 'none';
+                movingCard.style.transform = '';
+                movingCard.style.position = '';
+                movingCard.style.boxShadow = '';
+                
+                // Remove from original position and replace placeholder
+                viewedCards.removeChild(movingCard);
+                appliedCards.replaceChild(movingCard, placeholder);
+                
+                // Add highlight effect after placement
+                setTimeout(() => {
+                    movingCard.style.transition = 'all 0.3s ease';
+                    movingCard.style.borderColor = 'var(--jobesta-blue)';
+                    movingCard.style.background = 'var(--jobesta-gray-20)';
+                    
+                    setTimeout(() => {
+                        movingCard.style.borderColor = '';
+                        movingCard.style.background = '';
+                        movingCard.style.zIndex = '';
+                    }, 1000);
+                }, 50);
+            }, 1500);
+        }, 1000);
+    }
+}
+
 // Initialize on DOM load
 document.addEventListener('DOMContentLoaded', () => {
     // Add any initialization code here
     console.log('Jobesta Landing Page Loaded');
+    
+    // Initialize new features
+    initJobSearchChat();
+    initTypingEffect();
+    initJobTrackerAnimation();
 });

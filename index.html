@@ -17,6 +17,16 @@
     <link rel="stylesheet" href="css/styles.css">
     
     <!-- Favicon -->
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PNTVD903V0"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-PNTVD903V0');
+    </script>
 </head>
 <body>
     <!-- Header -->
@@ -99,8 +109,34 @@
                     <a href="https://app.jobesta.com/login" class="btn btn-primary">Get Started</a>
                 </div>
                 <div class="section-image">
-                    [Job Search Placeholder]
-
+                    <!-- Job Search Chat -->
+                    <div class="job-search-chat" id="jobSearchChat">
+                        <div class="chat-messages">
+                            <!-- User message -->
+                            <div class="chat-message user" id="jobSearchUserMessage" style="display: none;">
+                                <div class="message-bubble user" id="jobSearchUserText"></div>
+                            </div>
+                            
+                            <!-- Typing indicator -->
+                            <div class="chat-message assistant" id="jobSearchTyping" style="display: none;">
+                                <div class="typing-indicator">
+                                    <div class="typing-dots">
+                                        <div class="typing-dot"></div>
+                                        <div class="typing-dot"></div>
+                                        <div class="typing-dot"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- AI response -->
+                            <div class="chat-message assistant" id="jobSearchResponse" style="display: none;">
+                                <div class="message-bubble assistant">
+                                    <div id="jobSearchResponseText"></div>
+                                    <div class="job-listings" id="jobListings" style="display: none;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -115,7 +151,7 @@
                     <a href="https://app.jobesta.com/login" class="btn btn-primary">Get Started</a>
                 </div>
                 <div class="section-image">
-                    [CV Generator Placeholder]
+                    <img src="images/cover-2.webp" alt="CV and Cover Letter Generator" class="section-img-fitted">
                 </div>
             </div>
         </div>
@@ -123,29 +159,70 @@
 
     <section class="section fade-in">
         <div class="container">
+            <div class="typing-section-wrapper">
+                <h2 class="typing-title" data-text="Let AI Perfect Your Professional Profile"></h2>
+                <p class="typing-description" data-text="Rely on AI to analyze your profile and suggest edits that make it more professional."></p>
+                <a href="https://app.jobesta.com/login" class="btn btn-primary" style="margin-top: 30px;">Get Started</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section fade-in">
+        <div class="container">
             <div class="section-content">
-                <div class="section-text">
-                    <h2>Let AI Perfect Your Professional Profile</h2>
-                    <p>Rely on AI to analyze your profile and suggest edits that make it more professional.</p>
-                    <a href="https://app.jobesta.com/login" class="btn btn-primary">Get Started</a>
-                </div>
                 <div class="section-image">
-                    [Profile Enhancement Placeholder]
+                    <div class="job-tracker-preview" id="jobTrackerPreview">
+                        <div class="tracker-columns">
+                            <!-- LEFT COLUMN: Viewed -->
+                            <div class="tracker-column" data-column="viewed">
+                                <div class="column-header">Viewed</div>
+                                <div class="column-cards" id="viewedCards">
+                                    <div class="job-card">
+                                        <h4>Product Designer</h4>
+                                        <p>Apple</p>
+                                        <span class="card-date">2 days ago</span>
+                                    </div>
+                                    <div class="job-card" id="movingCard">
+                                        <h4>UX Researcher</h4>
+                                        <p>Meta</p>
+                                        <span class="card-date">3 days ago</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- MIDDLE COLUMN: Applied -->
+                            <div class="tracker-column" data-column="applied">
+                                <div class="column-header">Applied</div>
+                                <div class="column-cards" id="appliedCards">
+                                    <div class="job-card">
+                                        <h4>Senior Designer</h4>
+                                        <p>Spotify</p>
+                                        <span class="card-date">1 week ago</span>
+                                    </div>
+                                    <div class="job-card" style="opacity: 0; height: 0; margin: 0; padding: 0; overflow: hidden;" id="placeholderCard">
+                                        <h4>Placeholder</h4>
+                                        <p>Placeholder</p>
+                                        <span class="card-date">placeholder</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- RIGHT COLUMN: Interview -->
+                            <div class="tracker-column" data-column="interview">
+                                <div class="column-header">Interview</div>
+                                <div class="column-cards" id="interviewCards">
+                                    <div class="job-card">
+                                        <h4>Design Lead</h4>
+                                        <p>Airbnb</p>
+                                        <span class="card-date">2 weeks ago</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section fade-in">
-        <div class="container">
-            <div class="section-content">
                 <div class="section-text">
                     <h2>Stay on Top of Every Application With Our Smart Job Tracker</h2>
                     <p>Easily track every job application and keep all your documents organized in one place.</p>
                     <a href="https://app.jobesta.com/login" class="btn btn-primary">Get Started</a>
-                </div>
-                <div class="section-image">
-                    [Job Tracker Placeholder]
                 </div>
             </div>
         </div>
