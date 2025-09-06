@@ -1225,3 +1225,138 @@ a:hover {
     transform: translateY(0);
   }
 }
+
+/* Mobile Responsiveness for Job Tracker - Horizontal Scroll */
+@media (max-width: 768px) {
+  .job-tracker-preview {
+    padding: 15px;
+    min-height: auto;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    max-width: 100%;
+    width: 100%;
+  }
+  
+  /* Custom scrollbar for job tracker */
+  .job-tracker-preview::-webkit-scrollbar {
+    height: 8px;
+  }
+  
+  .job-tracker-preview::-webkit-scrollbar-track {
+    background: var(--jobesta-gray-20);
+    border-radius: 4px;
+  }
+  
+  .job-tracker-preview::-webkit-scrollbar-thumb {
+    background: var(--jobesta-gray-50);
+    border-radius: 4px;
+  }
+  
+  .job-tracker-preview::-webkit-scrollbar-thumb:hover {
+    background: var(--jobesta-gray-60);
+  }
+  
+  .tracker-columns {
+    flex-direction: row;
+    gap: 15px;
+    height: auto;
+    min-width: 600px; /* Ensure minimum width for horizontal scroll */
+  }
+  
+  .tracker-column {
+    flex: 0 0 180px; /* Fixed width columns */
+    min-height: 250px;
+  }
+  
+  .column-header {
+    font-size: 0.9rem;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  .job-card {
+    padding: 10px;
+    margin-bottom: 8px;
+  }
+  
+  .job-card h4 {
+    font-size: 0.85rem;
+  }
+  
+  .job-card p {
+    font-size: 0.75rem;
+  }
+  
+  .card-date {
+    font-size: 0.65rem;
+  }
+  
+  /* Disable animation on mobile to avoid layout issues */
+  .job-tracker-preview * {
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .job-tracker-preview {
+    padding: 10px;
+  }
+  
+  .tracker-columns {
+    gap: 12px;
+    min-width: 540px; /* Smaller minimum width for very small screens */
+  }
+  
+  .tracker-column {
+    flex: 0 0 160px; /* Slightly smaller columns */
+    min-height: 220px;
+  }
+  
+  .job-card {
+    padding: 8px;
+  }
+  
+  .column-header {
+    font-size: 0.85rem;
+  }
+}
+
+/* Mobile responsiveness for section layout */
+@media (max-width: 768px) {
+  .section-content {
+    flex-direction: column !important;
+    gap: 30px;
+  }
+  
+  .section-image, .section-text {
+    flex: none;
+    width: 100%;
+  }
+  
+  .container {
+    padding: 0 15px;
+  }
+  
+  /* Ensure proper spacing on mobile */
+  .section {
+    padding: 60px 0;
+  }
+  
+  /* Job tracker section specific - keep normal page layout */
+  .section .section-image {
+    width: 100%;
+    overflow: hidden; /* Prevent overflow at section level */
+  }
+  
+  /* Ensure no horizontal page scroll */
+  body, html {
+    overflow-x: hidden;
+  }
+  
+  .container {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+}
