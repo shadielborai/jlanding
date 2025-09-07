@@ -1386,6 +1386,30 @@ a:hover {
     opacity: 1 !important;
     visibility: visible !important;
   }
+  
+  /* Override the 3D transforms on mobile that cause z-index issues */
+  .job-tracker-preview * {
+    -webkit-transform: translateZ(0) !important;
+    transform: translateZ(0) !important;
+  }
+  
+  /* Ensure the moving card stays on top during animation */
+  #movingCard.card-moving {
+    z-index: 99999 !important;
+    position: relative !important;
+  }
+  
+  /* Create proper stacking context for columns */
+  .tracker-column {
+    position: relative;
+    z-index: auto !important;
+  }
+  
+  /* Disable 3D acceleration that interferes with z-index */
+  .tracker-columns {
+    -webkit-transform-style: flat !important;
+    transform-style: flat !important;
+  }
 }
 
 @media (max-width: 480px) {
