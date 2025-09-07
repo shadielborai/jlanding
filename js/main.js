@@ -309,61 +309,28 @@ function initJobSearchChat() {
     
     function playJobSearchChat() {
         const userQuery = "I need a job that perfectly matches my qualifications and skills, located in London";
+        const aiText = "Perfect! I found a job in London that matches your requirements:";
         
-        // Show and type user message
+        // Show user message immediately
         jobSearchUserMessage.style.display = 'flex';
-        let userText = '';
-        let userIndex = 0;
+        jobSearchUserText.textContent = userQuery;
         
-        function typeUserMessage() {
-            if (userIndex < userQuery.length) {
-                userText += userQuery[userIndex];
-                jobSearchUserText.textContent = userText;
-                userIndex++;
-                setTimeout(typeUserMessage, 30);
-            } else {
-                // Show typing indicator
-                setTimeout(() => {
-                    jobSearchTyping.style.display = 'flex';
-                    
-                    // Show AI response after delay
-                    setTimeout(() => {
-                        jobSearchTyping.style.display = 'none';
-                        jobSearchResponse.style.display = 'flex';
-                        
-                        const aiText = "Perfect! I found a job in London that matches your requirements:";
-                        let aiIndex = 0;
-                        let currentText = '';
-                        
-                        function typeAIResponse() {
-                            if (aiIndex < aiText.length) {
-                                currentText += aiText[aiIndex];
-                                jobSearchResponseText.textContent = currentText;
-                                aiIndex++;
-                                setTimeout(typeAIResponse, 20);
-                            } else {
-                                // Show job listings after typing
-                                setTimeout(() => {
-                                    jobListings.style.display = 'block';
-                                    jobListings.innerHTML = `
-                                        <div class="job-listing-item" style="opacity: 0; animation: fadeIn 0.5s ease forwards;">
-                                            <h4>Senior Fullstack Engineer</h4>
-                                            <div class="company">Google - London, UK</div>
-                                            <div class="description">Build scalable web applications using React and Node.js. Work with cross-functional teams to deliver innovative solutions.</div>
-                                            <button class="apply-btn">Apply</button>
-                                        </div>
-                                    `;
-                                }, 500);
-                            }
-                        }
-                        
-                        typeAIResponse();
-                    }, 1500);
-                }, 500);
-            }
-        }
-        
-        setTimeout(typeUserMessage, 500);
+        // Show AI response immediately
+        setTimeout(() => {
+            jobSearchResponse.style.display = 'flex';
+            jobSearchResponseText.textContent = aiText;
+            
+            // Show job listings
+            jobListings.style.display = 'block';
+            jobListings.innerHTML = `
+                <div class="job-listing-item" style="opacity: 0; animation: fadeIn 0.5s ease forwards;">
+                    <h4>Senior Fullstack Engineer</h4>
+                    <div class="company">Google - London, UK</div>
+                    <div class="description">Build scalable web applications using React and Node.js. Work with cross-functional teams to deliver innovative solutions.</div>
+                    <button class="apply-btn">Apply</button>
+                </div>
+            `;
+        }, 300);
     }
 }
 
@@ -464,6 +431,7 @@ function initJobTrackerAnimation() {
             placeholder.style.margin = '';
             placeholder.style.padding = '15px';
             placeholder.style.visibility = 'hidden'; // Hidden but takes up space for positioning
+            placeholder.style.opacity = '0'; // Extra insurance it stays invisible
             
             // Get positions for horizontal animation
             const startRect = movingCard.getBoundingClientRect();

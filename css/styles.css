@@ -888,6 +888,24 @@ a:hover {
 
   .pricing-cards {
     grid-template-columns: 1fr;
+    margin-top: 20px;
+    gap: 30px;
+  }
+  
+  .pricing-card {
+    padding: 30px 20px;
+  }
+  
+  .pricing-title {
+    font-size: 1.5rem;
+    margin-top: 0;
+  }
+  
+  .pricing-badge {
+    top: -12px;
+    right: 20px;
+    font-size: 0.85rem;
+    padding: 4px 15px;
   }
 
   .blog-grid {
@@ -1248,6 +1266,47 @@ a:hover {
 
 /* Mobile Responsiveness for Job Tracker - Horizontal Scroll */
 @media (max-width: 768px) {
+  /* Job Search Chat Section 2 mobile fixes */
+  .job-search-chat {
+    padding: 15px;
+    min-height: 350px;
+  }
+  
+  .job-search-chat .chat-messages {
+    max-height: 400px;
+  }
+  
+  .job-search-chat .message-bubble {
+    max-width: 85%;
+    padding: 10px 15px;
+    font-size: 0.95rem;
+  }
+  
+  .job-search-chat .message-bubble.user {
+    margin-left: 15%;
+  }
+  
+  .job-search-chat .message-bubble.assistant {
+    margin-right: 15%;
+  }
+  
+  .job-listings {
+    margin-top: 15px;
+  }
+  
+  .job-listing-item {
+    padding: 12px;
+  }
+  
+  .job-listing-item h4 {
+    font-size: 1rem;
+  }
+  
+  .job-listing-item .description {
+    font-size: 0.9rem;
+    margin: 8px 0;
+  }
+  
   .job-tracker-preview {
     padding: 15px;
     min-height: auto;
@@ -1318,6 +1377,25 @@ a:hover {
     backface-visibility: hidden;
     -webkit-perspective: 1000px;
     perspective: 1000px;
+  }
+  
+  /* Fix card animation z-index on mobile */
+  .card-moving {
+    z-index: 1000 !important;
+    position: relative !important;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+  }
+  
+  /* Ensure Applied column doesn't overlay during animation */
+  .tracker-column:last-child {
+    z-index: 1;
+  }
+  
+  /* Fix visibility during animation */
+  #movingCard {
+    opacity: 1 !important;
+    visibility: visible !important;
   }
 }
 
