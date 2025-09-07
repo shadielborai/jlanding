@@ -643,6 +643,12 @@ a:hover {
   padding: 80px 0;
 }
 
+.blog-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
 .blog-card {
   background: var(--jobesta-white);
   border-radius: 12px;
@@ -651,6 +657,7 @@ a:hover {
   transition: transform 0.3s ease;
 }
 
+.blog-card-link:hover .blog-card,
 .blog-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 30px rgba(0,0,0,0.12);
