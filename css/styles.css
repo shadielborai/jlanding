@@ -1226,6 +1226,26 @@ a:hover {
   }
 }
 
+/* Safari-compatible card move animation */
+@keyframes moveCardHorizontal {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(var(--move-distance), 0, 0) scale(1.05);
+  }
+  100% {
+    transform: translate3d(var(--move-distance), 0, 0) scale(1);
+  }
+}
+
+.card-moving {
+  animation: moveCardHorizontal 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  z-index: 100 !important;
+  position: relative !important;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2) !important;
+}
+
 /* Mobile Responsiveness for Job Tracker - Horizontal Scroll */
 @media (max-width: 768px) {
   .job-tracker-preview {

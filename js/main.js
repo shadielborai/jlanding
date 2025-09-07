@@ -471,51 +471,42 @@ function initJobTrackerAnimation() {
             
             // Calculate ONLY horizontal movement (same row level)
             const deltaX = endRect.left - startRect.left;
-            const deltaY = 0; // Force no vertical movement
             
-            // Apply pure horizontal transform animation with Safari compatibility
-            movingCard.style.position = 'relative';
-            movingCard.style.zIndex = '100';
-            movingCard.style.transition = 'transform 1.5s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 1.5s ease';
-            movingCard.style.webkitTransition = 'transform 1.5s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 1.5s ease';
-            movingCard.style.transform = `translate3d(${deltaX}px, 0, 0) scale(1.05)`;
-            movingCard.style.webkitTransform = `translate3d(${deltaX}px, 0, 0) scale(1.05)`;
-            movingCard.style.boxShadow = '0 15px 30px rgba(0, 0, 0, 0.2)';
-            movingCard.style.willChange = 'transform'; // Optimize for animations
+            // Set the move distance as CSS custom property for the animation
+            movingCard.style.setProperty('--move-distance', `${deltaX}px`);
             
-            setTimeout(() => {
-                // Reset styles and replace placeholder with Safari compatibility
-                movingCard.style.transition = 'none';
-                movingCard.style.webkitTransition = 'none';
-                movingCard.style.transform = '';
-                movingCard.style.webkitTransform = '';
-                movingCard.style.position = '';
-                movingCard.style.boxShadow = '';
-                movingCard.style.willChange = 'auto';
+            // Add the CSS animation class
+            movingCard.classList.add('card-moving');
+            
+            // Listen for animation end
+            const handleAnimationEnd = () => {
+                // Remove animation class and reset styles
+                movingCard.classList.remove('card-moving');
+                movingCard.style.removeProperty('--move-distance');
                 
                 // Remove from original position and replace placeholder
                 viewedCards.removeChild(movingCard);
                 appliedCards.replaceChild(movingCard, placeholder);
                 
-                // Force reflow for Safari
-                movingCard.offsetHeight;
-                
                 // Add highlight effect after placement
                 setTimeout(() => {
-                    movingCard.style.transition = 'border-color 0.3s ease, background-color 0.3s ease';
-                    movingCard.style.webkitTransition = 'border-color 0.3s ease, background-color 0.3s ease';
                     movingCard.style.borderColor = 'var(--jobesta-blue)';
                     movingCard.style.background = 'var(--jobesta-gray-20)';
+                    movingCard.style.transition = 'border-color 0.3s ease, background-color 0.3s ease';
                     
                     setTimeout(() => {
                         movingCard.style.borderColor = '';
                         movingCard.style.background = '';
-                        movingCard.style.zIndex = '';
                         movingCard.style.transition = '';
-                        movingCard.style.webkitTransition = '';
                     }, 1000);
                 }, 50);
-            }, 1500);
+                
+                // Remove event listener
+                movingCard.removeEventListener('animationend', handleAnimationEnd);
+            };
+            
+            movingCard.addEventListener('animationend', handleAnimationEnd);
+            
         }, 1000);
     }
 }
