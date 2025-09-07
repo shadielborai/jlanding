@@ -290,48 +290,26 @@ function initJobSearchChat() {
     
     if (!jobSearchUserMessage) return;
     
-    let chatAnimationPlayed = false;
+    const userQuery = "I need a job that perfectly matches my qualifications and skills, located in London";
+    const aiText = "Perfect! I found a job in London that matches your requirements:";
     
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting && !chatAnimationPlayed) {
-                chatAnimationPlayed = true;
-                playJobSearchChat();
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.3 });
+    // Show everything immediately - completely static
+    jobSearchUserMessage.style.display = 'flex';
+    jobSearchUserText.textContent = userQuery;
     
-    const chatSection = document.getElementById('jobSearchChat');
-    if (chatSection) {
-        observer.observe(chatSection);
-    }
+    jobSearchResponse.style.display = 'flex';
+    jobSearchResponseText.textContent = aiText;
     
-    function playJobSearchChat() {
-        const userQuery = "I need a job that perfectly matches my qualifications and skills, located in London";
-        const aiText = "Perfect! I found a job in London that matches your requirements:";
-        
-        // Show user message immediately
-        jobSearchUserMessage.style.display = 'flex';
-        jobSearchUserText.textContent = userQuery;
-        
-        // Show AI response immediately
-        setTimeout(() => {
-            jobSearchResponse.style.display = 'flex';
-            jobSearchResponseText.textContent = aiText;
-            
-            // Show job listings
-            jobListings.style.display = 'block';
-            jobListings.innerHTML = `
-                <div class="job-listing-item" style="opacity: 0; animation: fadeIn 0.5s ease forwards;">
-                    <h4>Senior Fullstack Engineer</h4>
-                    <div class="company">Google - London, UK</div>
-                    <div class="description">Build scalable web applications using React and Node.js. Work with cross-functional teams to deliver innovative solutions.</div>
-                    <button class="apply-btn">Apply</button>
-                </div>
-            `;
-        }, 300);
-    }
+    // Show job listings
+    jobListings.style.display = 'block';
+    jobListings.innerHTML = `
+        <div class="job-listing-item">
+            <h4>Senior Fullstack Engineer</h4>
+            <div class="company">Google - London, UK</div>
+            <div class="description">Build scalable web applications using React and Node.js. Work with cross-functional teams to deliver innovative solutions.</div>
+            <button class="apply-btn">Apply</button>
+        </div>
+    `;
 }
 
 // Typing Effect for Section 4

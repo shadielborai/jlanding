@@ -1259,9 +1259,11 @@ a:hover {
 
 .card-moving {
   animation: moveCardHorizontal 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  z-index: 100 !important;
+  z-index: 10000 !important;
   position: relative !important;
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2) !important;
+  transform-style: preserve-3d !important;
+  -webkit-transform-style: preserve-3d !important;
 }
 
 /* Mobile Responsiveness for Job Tracker - Horizontal Scroll */
@@ -1379,20 +1381,7 @@ a:hover {
     perspective: 1000px;
   }
   
-  /* Fix card animation z-index on mobile */
-  .card-moving {
-    z-index: 1000 !important;
-    position: relative !important;
-    -webkit-transform-style: preserve-3d;
-    transform-style: preserve-3d;
-  }
-  
-  /* Ensure Applied column doesn't overlay during animation */
-  .tracker-column:last-child {
-    z-index: 1;
-  }
-  
-  /* Fix visibility during animation */
+  /* Fix visibility during animation on mobile */
   #movingCard {
     opacity: 1 !important;
     visibility: visible !important;
