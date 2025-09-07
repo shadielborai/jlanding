@@ -404,38 +404,68 @@ function initJobTrackerAnimation() {
             const placeholder = document.getElementById('placeholderCard');
             if (!placeholder) return;
             
-            // Temporarily make placeholder visible ONLY to calculate position (but keep it invisible)
-            placeholder.style.height = 'auto';
-            placeholder.style.margin = '';
-            placeholder.style.padding = '15px';
-            placeholder.style.visibility = 'hidden'; // Hidden but takes up space for positioning
-            placeholder.style.opacity = '0'; // Extra insurance it stays invisible
+            // Check if we're on mobile
+            const isMobile = window.innerWidth <= 768;
             
-            // Get positions for horizontal animation
-            const startRect = movingCard.getBoundingClientRect();
-            const endRect = placeholder.getBoundingClientRect();
-            
-            // Calculate ONLY horizontal movement (same row level)
-            const deltaX = endRect.left - startRect.left;
-            
-            // Set the move distance as CSS custom property for the animation
-            movingCard.style.setProperty('--move-distance', `${deltaX}px`);
-            
-            // Add the CSS animation class
-            movingCard.classList.add('card-moving');
-            
-            // Listen for animation end
-            const handleAnimationEnd = () => {
-                // Remove animation class and reset styles
-                movingCard.classList.remove('card-moving');
-                movingCard.style.removeProperty('--move-distance');
+            if (isMobile) {
+                // Mobile: Use absolute positioning for animation to avoid z-index issues
+                const trackerPreview = document.getElementById('jobTrackerPreview');
+                const startRect = movingCard.getBoundingClientRect();
+                const trackerRect = trackerPreview.getBoundingClientRect();
                 
-                // Remove from original position and replace placeholder
-                viewedCards.removeChild(movingCard);
-                appliedCards.replaceChild(movingCard, placeholder);
+                // Temporarily make placeholder visible to calculate position
+                placeholder.style.height = 'auto';
+                placeholder.style.margin = '';
+                placeholder.style.padding = '15px';
+                placeholder.style.visibility = 'hidden';
+                placeholder.style.opacity = '0';
                 
-                // Add highlight effect after placement
+                const endRect = placeholder.getBoundingClientRect();
+                
+                // Calculate movement relative to tracker preview container
+                const startX = startRect.left - trackerRect.left;
+                const startY = startRect.top - trackerRect.top;
+                const endX = endRect.left - trackerRect.left;
+                const endY = endRect.top - trackerRect.top;
+                
+                // Clone the card for animation
+                const animatingCard = movingCard.cloneNode(true);
+                animatingCard.id = 'animatingCard';
+                animatingCard.style.position = 'absolute';
+                animatingCard.style.left = startX + 'px';
+                animatingCard.style.top = startY + 'px';
+                animatingCard.style.width = startRect.width + 'px';
+                animatingCard.style.zIndex = '99999';
+                animatingCard.style.transition = 'all 1.5s cubic-bezier(0.4, 0, 0.2, 1)';
+                
+                // Hide original card completely with multiple methods
+                movingCard.style.display = 'none';
+                movingCard.style.visibility = 'hidden';
+                movingCard.style.opacity = '0';
+                
+                // Add animating card to tracker preview
+                trackerPreview.style.position = 'relative';
+                trackerPreview.appendChild(animatingCard);
+                
+                // Trigger animation
                 setTimeout(() => {
+                    animatingCard.style.left = endX + 'px';
+                    animatingCard.style.top = endY + 'px';
+                }, 50);
+                
+                // Handle animation end
+                setTimeout(() => {
+                    // Remove animating card
+                    trackerPreview.removeChild(animatingCard);
+                    
+                    // Move original card to new position
+                    viewedCards.removeChild(movingCard);
+                    movingCard.style.display = '';
+                    movingCard.style.visibility = '';
+                    movingCard.style.opacity = '';
+                    appliedCards.replaceChild(movingCard, placeholder);
+                    
+                    // Add highlight effect
                     movingCard.style.borderColor = 'var(--jobesta-blue)';
                     movingCard.style.background = 'var(--jobesta-gray-20)';
                     movingCard.style.transition = 'border-color 0.3s ease, background-color 0.3s ease';
@@ -445,13 +475,59 @@ function initJobTrackerAnimation() {
                         movingCard.style.background = '';
                         movingCard.style.transition = '';
                     }, 1000);
-                }, 50);
+                }, 1550);
                 
-                // Remove event listener
-                movingCard.removeEventListener('animationend', handleAnimationEnd);
-            };
-            
-            movingCard.addEventListener('animationend', handleAnimationEnd);
+            } else {
+                // Desktop: Use original CSS animation
+                // Temporarily make placeholder visible ONLY to calculate position (but keep it invisible)
+                placeholder.style.height = 'auto';
+                placeholder.style.margin = '';
+                placeholder.style.padding = '15px';
+                placeholder.style.visibility = 'hidden'; // Hidden but takes up space for positioning
+                placeholder.style.opacity = '0'; // Extra insurance it stays invisible
+                
+                // Get positions for horizontal animation
+                const startRect = movingCard.getBoundingClientRect();
+                const endRect = placeholder.getBoundingClientRect();
+                
+                // Calculate ONLY horizontal movement (same row level)
+                const deltaX = endRect.left - startRect.left;
+                
+                // Set the move distance as CSS custom property for the animation
+                movingCard.style.setProperty('--move-distance', `${deltaX}px`);
+                
+                // Add the CSS animation class
+                movingCard.classList.add('card-moving');
+                
+                // Listen for animation end
+                const handleAnimationEnd = () => {
+                    // Remove animation class and reset styles
+                    movingCard.classList.remove('card-moving');
+                    movingCard.style.removeProperty('--move-distance');
+                    
+                    // Remove from original position and replace placeholder
+                    viewedCards.removeChild(movingCard);
+                    appliedCards.replaceChild(movingCard, placeholder);
+                    
+                    // Add highlight effect after placement
+                    setTimeout(() => {
+                        movingCard.style.borderColor = 'var(--jobesta-blue)';
+                        movingCard.style.background = 'var(--jobesta-gray-20)';
+                        movingCard.style.transition = 'border-color 0.3s ease, background-color 0.3s ease';
+                        
+                        setTimeout(() => {
+                            movingCard.style.borderColor = '';
+                            movingCard.style.background = '';
+                            movingCard.style.transition = '';
+                        }, 1000);
+                    }, 50);
+                    
+                    // Remove event listener
+                    movingCard.removeEventListener('animationend', handleAnimationEnd);
+                };
+                
+                movingCard.addEventListener('animationend', handleAnimationEnd);
+            }
             
         }, 1000);
     }
