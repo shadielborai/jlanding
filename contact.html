@@ -18,6 +18,9 @@
     
     <!-- Favicon -->
     
+    <!-- Google reCAPTCHA -->
+    <script src="https://www.google.com/recaptcha/api.js?render=6Ldl5sMrAAAAAHqqCcP3fR9gL8YOMlkYOpWrQS1Q"></script>
+    
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-PNTVD903V0"></script>
     <script>
@@ -95,7 +98,7 @@
                                   style="width: 100%; padding: 12px; border: 1px solid var(--jobesta-gray-40); border-radius: 6px; font-size: 1rem; resize: vertical;"></textarea>
                     </div>
                     
-                    <button type="submit" class="btn btn-primary" style="width: 100%; padding: 15px;">
+                    <button type="submit" id="submitBtn" class="btn btn-primary" disabled style="width: 100%; padding: 15px; cursor: not-allowed; opacity: 0.6;">
                         Send Message
                     </button>
                 </form>
@@ -163,11 +166,115 @@
     <!-- Main JavaScript -->
     <script src="js/main.js"></script>
     <script>
-        // Contact form handler
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
+        // Configuration
+        const RECAPTCHA_SITE_KEY = '6Ldl5sMrAAAAAHqqCcP3fR9gL8YOMlkYOpWrQS1Q';
+        const API_ENDPOINT = 'https://slack-bot-545273374205.europe-north2.run.app/api/contact';
+        
+        // Form elements
+        const form = document.getElementById('contactForm');
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+        const subjectInput = document.getElementById('subject');
+        const messageInput = document.getElementById('message');
+        const submitBtn = document.getElementById('submitBtn');
+        
+        // Email validation regex
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        
+        // Validate email format
+        function isValidEmail(email) {
+            return emailRegex.test(email);
+        }
+        
+        // Check if all fields are valid
+        function validateForm() {
+            const isNameValid = nameInput.value.trim().length > 0;
+            const isEmailValid = isValidEmail(emailInput.value);
+            const isSubjectValid = subjectInput.value !== '';
+            const isMessageValid = messageInput.value.trim().length > 0;
+            
+            return isNameValid && isEmailValid && isSubjectValid && isMessageValid;
+        }
+        
+        // Update submit button state
+        function updateSubmitButton() {
+            if (validateForm()) {
+                submitBtn.disabled = false;
+                submitBtn.style.cursor = 'pointer';
+                submitBtn.style.opacity = '1';
+            } else {
+                submitBtn.disabled = true;
+                submitBtn.style.cursor = 'not-allowed';
+                submitBtn.style.opacity = '0.6';
+            }
+        }
+        
+        // Add input event listeners
+        nameInput.addEventListener('input', updateSubmitButton);
+        emailInput.addEventListener('input', updateSubmitButton);
+        subjectInput.addEventListener('change', updateSubmitButton);
+        messageInput.addEventListener('input', updateSubmitButton);
+        
+        // Handle form submission
+        form.addEventListener('submit', async function(e) {
             e.preventDefault();
-            alert('Thank you for your message! We will get back to you soon.');
-            this.reset();
+            
+            if (!validateForm()) {
+                alert('Please fill in all required fields correctly.');
+                return;
+            }
+            
+            // Disable button and show loading state
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+            
+            try {
+                // Execute reCAPTCHA
+                const recaptchaToken = await grecaptcha.execute(RECAPTCHA_SITE_KEY, {action: 'submit'});
+                
+                // Prepare form data
+                const formData = {
+                    name: nameInput.value.trim(),
+                    email: emailInput.value.trim(),
+                    subject: subjectInput.value,
+                    message: messageInput.value.trim(),
+                    recaptchaToken: recaptchaToken
+                };
+                
+                // Send request to API
+                const response = await fetch(API_ENDPOINT, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok && data.success) {
+                    // Success
+                    alert('Thank you for your message! We will get back to you within 24-48 hours.');
+                    form.reset();
+                    updateSubmitButton();
+                } else {
+                    // Error from server
+                    throw new Error(data.message || 'Failed to send message');
+                }
+                
+            } catch (error) {
+                console.error('Error sending message:', error);
+                alert('Sorry, there was an error sending your message. Please try again later or email us directly at support@jobesta.com');
+            } finally {
+                // Reset button state
+                submitBtn.textContent = 'Send Message';
+                updateSubmitButton();
+            }
+        });
+        
+        // Initialize form validation on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateSubmitButton();
         });
     </script>
 </body>
