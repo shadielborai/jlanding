@@ -19,7 +19,7 @@
     <!-- Favicon -->
     
     <!-- Google reCAPTCHA v2 -->
-    <script src="https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoad&render=explicit" async defer></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-PNTVD903V0"></script>
@@ -99,7 +99,7 @@
                     </div>
                     
                     <!-- Invisible reCAPTCHA -->
-                    <div id="recaptcha-container"></div>
+                    <div class="g-recaptcha" data-sitekey="6Ldl5sMrAAAAAHqqCcP3fR9gL8YOMlkYOpWrQS1Q" data-size="invisible" data-callback="onRecaptchaSuccess"></div>
                     
                     <button type="submit" id="submitBtn" class="btn btn-primary" disabled style="width: 100%; padding: 15px; cursor: not-allowed; opacity: 0.6;">
                         Send Message
@@ -170,7 +170,6 @@
     <script src="js/main.js"></script>
     <script>
         // Configuration
-        const RECAPTCHA_SITE_KEY = '6Ldl5sMrAAAAAHqqCcP3fR9gL8YOMlkYOpWrQS1Q';
         const API_ENDPOINT = 'https://slack-bot-545273374205.europe-north2.run.app/api/contact';
         
         // Form elements
@@ -181,8 +180,8 @@
         const messageInput = document.getElementById('message');
         const submitBtn = document.getElementById('submitBtn');
         
-        // reCAPTCHA widget ID
-        let recaptchaWidgetId;
+        // Store reCAPTCHA token
+        let currentRecaptchaToken = null;
         
         // Email validation regex
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -215,17 +214,10 @@
             }
         }
         
-        // Initialize reCAPTCHA when API is ready
-        function onRecaptchaLoad() {
-            try {
-                recaptchaWidgetId = grecaptcha.render('recaptcha-container', {
-                    'sitekey': RECAPTCHA_SITE_KEY,
-                    'size': 'invisible'
-                });
-                console.log('reCAPTCHA widget initialized with ID:', recaptchaWidgetId);
-            } catch (error) {
-                console.error('Failed to initialize reCAPTCHA:', error);
-            }
+        // reCAPTCHA callback when verification succeeds
+        function onRecaptchaSuccess(token) {
+            currentRecaptchaToken = token;
+            console.log('reCAPTCHA token received:', token ? 'Yes' : 'No');
         }
         
         // Add input event listeners
@@ -245,32 +237,26 @@
             
             // Disable button and show loading state
             submitBtn.disabled = true;
-            submitBtn.textContent = 'Sending...';
+            submitBtn.textContent = 'Verifying...';
             
             try {
                 // Execute invisible reCAPTCHA
-                let recaptchaToken = null;
+                currentRecaptchaToken = null;
+                grecaptcha.execute();
                 
-                if (typeof grecaptcha !== 'undefined' && recaptchaWidgetId !== undefined) {
-                    try {
-                        recaptchaToken = await new Promise((resolve, reject) => {
-                            grecaptcha.ready(() => {
-                                grecaptcha.execute(recaptchaWidgetId)
-                                    .then(resolve)
-                                    .catch(reject);
-                            });
-                        });
-                        console.log('reCAPTCHA token generated successfully');
-                    } catch (recaptchaError) {
-                        console.error('reCAPTCHA execution failed:', recaptchaError);
-                        alert('reCAPTCHA verification failed. Please refresh the page and try again.');
-                        return;
-                    }
-                } else {
-                    console.error('reCAPTCHA not properly initialized');
-                    alert('reCAPTCHA not loaded. Please refresh the page and try again.');
+                // Wait for reCAPTCHA token (with timeout)
+                let attempts = 0;
+                while (!currentRecaptchaToken && attempts < 50) { // 5 seconds timeout
+                    await new Promise(resolve => setTimeout(resolve, 100));
+                    attempts++;
+                }
+                
+                if (!currentRecaptchaToken) {
+                    alert('reCAPTCHA verification timed out. Please try again.');
                     return;
                 }
+                
+                submitBtn.textContent = 'Sending...';
                 
                 // Prepare form data
                 const formData = {
@@ -278,8 +264,10 @@
                     email: emailInput.value.trim(),
                     subject: subjectInput.value,
                     message: messageInput.value.trim(),
-                    recaptchaToken: recaptchaToken
+                    recaptchaToken: currentRecaptchaToken
                 };
+                
+                console.log('Sending form data:', formData);
                 
                 // Send request to API
                 const response = await fetch(API_ENDPOINT, {
@@ -297,8 +285,8 @@
                     alert('Thank you for your message! We will get back to you within 24-48 hours.');
                     form.reset();
                     updateSubmitButton();
-                    // Reset reCAPTCHA
-                    grecaptcha.reset(recaptchaWidgetId);
+                    currentRecaptchaToken = null;
+                    grecaptcha.reset();
                 } else {
                     // Error from server
                     throw new Error(data.message || 'Failed to send message');
@@ -307,10 +295,8 @@
             } catch (error) {
                 console.error('Error sending message:', error);
                 alert('Sorry, there was an error sending your message. Please try again later or email us directly at support@jobesta.com');
-                // Reset reCAPTCHA on error
-                if (recaptchaWidgetId !== undefined) {
-                    grecaptcha.reset(recaptchaWidgetId);
-                }
+                grecaptcha.reset();
+                currentRecaptchaToken = null;
             } finally {
                 // Reset button state
                 submitBtn.textContent = 'Send Message';
@@ -323,8 +309,8 @@
             updateSubmitButton();
         });
         
-        // Make onRecaptchaLoad globally available
-        window.onRecaptchaLoad = onRecaptchaLoad;
+        // Make callback globally available
+        window.onRecaptchaSuccess = onRecaptchaSuccess;
     </script>
 </body>
 </html>
