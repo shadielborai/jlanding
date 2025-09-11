@@ -206,24 +206,54 @@ if (newsletterEmail && newsletterBtn) {
 
     // Handle form submission
     if (newsletterForm) {
-        newsletterForm.addEventListener('submit', (e) => {
+        newsletterForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const email = newsletterEmail.value;
             
             if (emailRegex.test(email)) {
-                // Show success message (in production, this would send to backend)
                 const originalText = newsletterBtn.textContent;
-                newsletterBtn.textContent = 'Subscribed!';
-                newsletterBtn.style.background = 'var(--jobesta-green)';
+                newsletterBtn.textContent = 'Subscribing...';
+                newsletterBtn.disabled = true;
                 
-                // Reset form after 3 seconds
-                setTimeout(() => {
-                    newsletterEmail.value = '';
-                    newsletterBtn.textContent = originalText;
-                    newsletterBtn.style.background = '';
-                    newsletterBtn.disabled = true;
-                    newsletterEmail.style.borderColor = 'var(--jobesta-gray-70)';
-                }, 3000);
+                try {
+                    const response = await fetch('https://slack-bot-545273374205.europe-north2.run.app/api/subscribe', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ email: email })
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (response.ok && data.success) {
+                        // Success
+                        newsletterBtn.textContent = 'Subscribed!';
+                        newsletterBtn.style.background = 'var(--jobesta-green)';
+                        
+                        // Reset form after 3 seconds
+                        setTimeout(() => {
+                            newsletterEmail.value = '';
+                            newsletterBtn.textContent = originalText;
+                            newsletterBtn.style.background = '';
+                            newsletterBtn.disabled = true;
+                            newsletterEmail.style.borderColor = 'var(--jobesta-gray-70)';
+                        }, 3000);
+                    } else {
+                        throw new Error(data.message || 'Failed to subscribe');
+                    }
+                } catch (error) {
+                    console.error('Subscription error:', error);
+                    newsletterBtn.textContent = 'Error - Try Again';
+                    newsletterBtn.style.background = 'var(--jobesta-red)';
+                    
+                    // Reset button after 3 seconds
+                    setTimeout(() => {
+                        newsletterBtn.textContent = originalText;
+                        newsletterBtn.style.background = '';
+                        newsletterBtn.disabled = false;
+                    }, 3000);
+                }
             }
         });
     }
