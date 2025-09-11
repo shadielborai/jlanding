@@ -217,10 +217,15 @@
         
         // Initialize reCAPTCHA when API is ready
         function onRecaptchaLoad() {
-            recaptchaWidgetId = grecaptcha.render('recaptcha-container', {
-                'sitekey': RECAPTCHA_SITE_KEY,
-                'size': 'invisible'
-            });
+            try {
+                recaptchaWidgetId = grecaptcha.render('recaptcha-container', {
+                    'sitekey': RECAPTCHA_SITE_KEY,
+                    'size': 'invisible'
+                });
+                console.log('reCAPTCHA widget initialized with ID:', recaptchaWidgetId);
+            } catch (error) {
+                console.error('Failed to initialize reCAPTCHA:', error);
+            }
         }
         
         // Add input event listeners
@@ -244,13 +249,28 @@
             
             try {
                 // Execute invisible reCAPTCHA
-                const recaptchaToken = await new Promise((resolve, reject) => {
-                    grecaptcha.ready(() => {
-                        grecaptcha.execute(recaptchaWidgetId)
-                            .then(resolve)
-                            .catch(reject);
-                    });
-                });
+                let recaptchaToken = null;
+                
+                if (typeof grecaptcha !== 'undefined' && recaptchaWidgetId !== undefined) {
+                    try {
+                        recaptchaToken = await new Promise((resolve, reject) => {
+                            grecaptcha.ready(() => {
+                                grecaptcha.execute(recaptchaWidgetId)
+                                    .then(resolve)
+                                    .catch(reject);
+                            });
+                        });
+                        console.log('reCAPTCHA token generated successfully');
+                    } catch (recaptchaError) {
+                        console.error('reCAPTCHA execution failed:', recaptchaError);
+                        alert('reCAPTCHA verification failed. Please refresh the page and try again.');
+                        return;
+                    }
+                } else {
+                    console.error('reCAPTCHA not properly initialized');
+                    alert('reCAPTCHA not loaded. Please refresh the page and try again.');
+                    return;
+                }
                 
                 // Prepare form data
                 const formData = {
