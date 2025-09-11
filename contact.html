@@ -18,8 +18,8 @@
     
     <!-- Favicon -->
     
-    <!-- Google reCAPTCHA -->
-    <script src="https://www.google.com/recaptcha/api.js?render=6Ldl5sMrAAAAAHqqCcP3fR9gL8YOMlkYOpWrQS1Q"></script>
+    <!-- Google reCAPTCHA v2 -->
+    <script src="https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoad&render=explicit" async defer></script>
     
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-PNTVD903V0"></script>
@@ -97,6 +97,9 @@
                         <textarea id="message" name="message" rows="6" required 
                                   style="width: 100%; padding: 12px; border: 1px solid var(--jobesta-gray-40); border-radius: 6px; font-size: 1rem; resize: vertical;"></textarea>
                     </div>
+                    
+                    <!-- Invisible reCAPTCHA -->
+                    <div id="recaptcha-container"></div>
                     
                     <button type="submit" id="submitBtn" class="btn btn-primary" disabled style="width: 100%; padding: 15px; cursor: not-allowed; opacity: 0.6;">
                         Send Message
@@ -178,6 +181,9 @@
         const messageInput = document.getElementById('message');
         const submitBtn = document.getElementById('submitBtn');
         
+        // reCAPTCHA widget ID
+        let recaptchaWidgetId;
+        
         // Email validation regex
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         
@@ -209,6 +215,14 @@
             }
         }
         
+        // Initialize reCAPTCHA when API is ready
+        function onRecaptchaLoad() {
+            recaptchaWidgetId = grecaptcha.render('recaptcha-container', {
+                'sitekey': RECAPTCHA_SITE_KEY,
+                'size': 'invisible'
+            });
+        }
+        
         // Add input event listeners
         nameInput.addEventListener('input', updateSubmitButton);
         emailInput.addEventListener('input', updateSubmitButton);
@@ -229,8 +243,14 @@
             submitBtn.textContent = 'Sending...';
             
             try {
-                // Execute reCAPTCHA
-                const recaptchaToken = await grecaptcha.execute(RECAPTCHA_SITE_KEY, {action: 'submit'});
+                // Execute invisible reCAPTCHA
+                const recaptchaToken = await new Promise((resolve, reject) => {
+                    grecaptcha.ready(() => {
+                        grecaptcha.execute(recaptchaWidgetId)
+                            .then(resolve)
+                            .catch(reject);
+                    });
+                });
                 
                 // Prepare form data
                 const formData = {
@@ -257,6 +277,8 @@
                     alert('Thank you for your message! We will get back to you within 24-48 hours.');
                     form.reset();
                     updateSubmitButton();
+                    // Reset reCAPTCHA
+                    grecaptcha.reset(recaptchaWidgetId);
                 } else {
                     // Error from server
                     throw new Error(data.message || 'Failed to send message');
@@ -265,6 +287,10 @@
             } catch (error) {
                 console.error('Error sending message:', error);
                 alert('Sorry, there was an error sending your message. Please try again later or email us directly at support@jobesta.com');
+                // Reset reCAPTCHA on error
+                if (recaptchaWidgetId !== undefined) {
+                    grecaptcha.reset(recaptchaWidgetId);
+                }
             } finally {
                 // Reset button state
                 submitBtn.textContent = 'Send Message';
@@ -276,6 +302,9 @@
         document.addEventListener('DOMContentLoaded', function() {
             updateSubmitButton();
         });
+        
+        // Make onRecaptchaLoad globally available
+        window.onRecaptchaLoad = onRecaptchaLoad;
     </script>
 </body>
 </html>
