@@ -19,8 +19,35 @@
     
     <!-- Styles -->
     <link rel="stylesheet" href="../css/styles.css">
-    
+
     <!-- Favicon -->
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PNTVD903V0"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      // Set default consent to denied for EU compliance
+      gtag('consent', 'default', {
+        'analytics_storage': 'denied',
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied'
+      });
+
+      // Update consent to granted for analytics only (cookie-less mode)
+      gtag('consent', 'update', {
+        'analytics_storage': 'granted'
+      });
+
+      // Configure with IP anonymization and disabled ad personalization
+      gtag('config', 'G-PNTVD903V0', {
+        'anonymize_ip': true,
+        'allow_ad_personalization_signals': false
+      });
+    </script>
 </head>
 <body>
     <!-- Header -->
