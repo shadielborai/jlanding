@@ -95,6 +95,12 @@
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
+    <url>
+        <loc>https://www.jobesta.com/blog/how-ai-revolutionizing-job-search.html</loc>
+        <lastmod>2025-01-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
     
     <url>
         <loc>https://www.jobesta.com/blog/ats-friendly-cv-tips.html</loc>
