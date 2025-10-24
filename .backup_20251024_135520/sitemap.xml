@@ -60,36 +60,6 @@
     
     <!-- Blog Posts - Example entries (update these with actual blog posts) -->
     <url>
-        <loc>https://www.jobesta.com/blog/first-job-interview-preparation-steps.html</loc>
-        <lastmod>2025-10-24</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.6</priority>
-    </url>
-    <url>
-        <loc>https://www.jobesta.com/blog/why-you-should-always-be-job-searching.html</loc>
-        <lastmod>2025-10-24</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.6</priority>
-    </url>
-    <url>
-        <loc>https://www.jobesta.com/blog/why-landing-a-job-is-hard-and-how-to-make-it-easier.html</loc>
-        <lastmod>2025-10-24</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.6</priority>
-    </url>
-    <url>
-        <loc>https://www.jobesta.com/blog/why-you-should-not-include-photo-on-resume.html</loc>
-        <lastmod>2025-10-24</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.6</priority>
-    </url>
-    <url>
-        <loc>https://www.jobesta.com/blog/risks-confidential-job-postings.html</loc>
-        <lastmod>2025-10-24</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.6</priority>
-    </url>
-    <url>
         <loc>https://www.jobesta.com/blog/job-alerts-benefits-us-job-seekers.html</loc>
         <lastmod>2025-10-24</lastmod>
         <changefreq>monthly</changefreq>
