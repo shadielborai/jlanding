@@ -8,7 +8,7 @@ Disallow: /fonts/
 Disallow: /blog/template.html
 
 # Sitemap location
-Sitemap: https://www.jobesta.com/sitemap.xml
+Sitemap: https://jobesta.com/sitemap.xml
 
 # Crawl-delay for polite crawling (in seconds)
 Crawl-delay: 1
