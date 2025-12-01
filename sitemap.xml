@@ -42,7 +42,22 @@
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
-    
+
+    <!-- Feature Pages -->
+    <url>
+        <loc>https://jobesta.com/cv.html</loc>
+        <lastmod>2025-12-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://jobesta.com/cover-letter.html</loc>
+        <lastmod>2025-12-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
     <!-- Legal Pages -->
     <url>
         <loc>https://jobesta.com/privacy.html</loc>

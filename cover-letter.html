@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Create Professional Cover Letters in Seconds. Generate ATS-friendly, personalized cover letters tailored to any job application.">
+    <meta name="keywords" content="cover letter generator, professional cover letter, AI cover letter, job application letter, personalized cover letter">
+    <meta name="author" content="Jobesta">
+    <title>Cover Letter Generator - Create Professional Cover Letters | Jobesta</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="images/fav/favicon_16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/fav/favicon_32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="images/fav/favicon_48.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="images/fav/favicon_192.png">
+    <link rel="apple-touch-icon" sizes="256x256" href="images/fav/favicon_256.png">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PNTVD903V0"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('consent', 'default', {
+        'analytics_storage': 'denied',
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied'
+      });
+
+      gtag('consent', 'update', {
+        'analytics_storage': 'granted'
+      });
+
+      gtag('config', 'G-PNTVD903V0', {
+        'anonymize_ip': true,
+        'allow_ad_personalization_signals': false
+      });
+    </script>
+
+    <style>
+        /* Ensure hero fills viewport and has proper stacking */
+        .hero {
+            min-height: 100vh !important;
+            position: relative !important;
+            z-index: 1 !important;
+        }
+
+        /* Cover Letter Rotation Styles */
+        #cl-canvas-container {
+            width: 100%;
+            height: 100%;
+            min-height: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        #cl-template-name {
+            display: none;
+        }
+
+        .bold-section {
+            background: var(--jobesta-gray-10);
+            padding: 120px 0;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .bold-section .container {
+            width: 100%;
+        }
+
+        .bold-section h2 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--jobesta-gray-90);
+            margin-bottom: 2rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.3;
+        }
+
+        .bold-section p {
+            font-size: 1.4rem;
+            color: var(--jobesta-gray-80);
+            max-width: 750px;
+            margin: 0 auto;
+            line-height: 1.7;
+            font-weight: 500;
+        }
+
+        /* Ensure sections stack properly */
+        .section {
+            position: relative;
+            z-index: 2;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                min-height: 100vh !important;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr !important;
+                gap: 30px !important;
+            }
+
+            #cl-canvas-container {
+                min-height: 400px;
+            }
+
+            .bold-section {
+                padding: 80px 20px;
+                min-height: 80vh;
+            }
+
+            .bold-section h2 {
+                font-size: 1.8rem;
+            }
+
+            .bold-section p {
+                font-size: 1.15rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-left h1 {
+                font-size: 2rem !important;
+            }
+
+            .hero-left p {
+                font-size: 1rem !important;
+            }
+
+            .bold-section h2 {
+                font-size: 1.6rem;
+            }
+
+            .bold-section p {
+                font-size: 1.05rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav-wrapper">
+                <a href="index.html" class="logo">
+                    <span class="logo-bold">Job</span><span class="logo-light">esta</span>
+                </a>
+                <ul class="nav-menu">
+                    <li><a href="index.html#features" class="nav-link">Features</a></li>
+                    <li><a href="pricing.html" class="nav-link">Pricing</a></li>
+                    <li><a href="blog.html" class="nav-link">Blog</a></li>
+                    <li><a href="about.html" class="nav-link">About Us</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                    <li><a href="https://app.jobesta.com/login" class="btn btn-primary">Get Started</a></li>
+                </ul>
+                <div class="mobile-menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section with Rotating Cover Letter -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-left">
+                    <h1>Create a Compelling Cover Letter in Seconds</h1>
+                    <p>Generate personalized, professional cover letters that grab attention and get you noticed by hiring managers.</p>
+                    <a href="https://app.jobesta.com/login" class="btn btn-primary">Get Started</a>
+                </div>
+                <div class="hero-right">
+                    <div id="cl-canvas-container"></div>
+                    <div id="cl-template-name">Standard Template</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bold Text Section -->
+    <section class="bold-section">
+        <div class="container">
+            <h2>Stand Out with a Cover Letter That Gets Results</h2>
+            <p>Our AI-powered generator creates personalized cover letters that highlight your strengths and match the job requirements perfectly.</p>
+        </div>
+    </section>
+
+    <!-- AI Profile Section -->
+    <section class="section fade-in">
+        <div class="container">
+            <div class="typing-section-wrapper">
+                <h2 class="typing-title" data-text="Let AI Perfect Your Professional Profile"></h2>
+                <p class="typing-description" data-text="Our AI boosts your cover letter, adapts it to any role, makes it ATS-ready — and even connects you with real job openings worldwide."></p>
+                <a href="https://app.jobesta.com/login" class="btn btn-primary" style="margin-top: 30px;">Get Started</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3><span style="font-weight: 900;">Job</span><span style="font-weight: 200;">esta</span></h3>
+                    <p>Land your dream job faster</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="blog.html">Blogs</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Features</h3>
+                    <ul class="footer-links">
+                        <li><a href="cv.html">CV Generator</a></li>
+                        <li><a href="cover-letter.html">Cover Letter Generator</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Compliance</h3>
+                    <ul class="footer-links">
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Newsletter</h3>
+                    <p>Stay updated with the latest job search tips and features</p>
+                    <form class="newsletter-form" id="newsletterForm">
+                        <input type="email" class="newsletter-input" placeholder="Enter your email" id="newsletterEmail">
+                        <button type="submit" class="newsletter-btn" id="newsletterBtn" disabled>Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 Jobesta, All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <!-- Typed.js -->
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+
+    <!-- Main JavaScript -->
+    <script src="js/main.js"></script>
+
+    <!-- Cover Letter Rotation Script -->
+    <script>
+        // Cover Letter templates
+        const clTemplates = [
+            { name: 'Standard Template', file: 'images/cl/cl-standard.webp' },
+            { name: 'Modern Template', file: 'images/cl/cl-modern.webp' },
+            { name: 'Creative Template', file: 'images/cl/cl-creative.webp' },
+            { name: 'Organic Wave Template', file: 'images/cl/cl-organic-wave.webp' },
+            { name: 'Wavy Template', file: 'images/cl/cl-wavy.webp' }
+        ];
+
+        let currentIndex = 0;
+        let isPaused = false;
+        let isAnimating = false;
+        let hasSwapped = false;
+        let rotationCycle = 0;
+
+        // Three.js setup
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(
+            75,
+            1,
+            0.1,
+            1000
+        );
+        camera.position.z = 3;
+
+        const container = document.getElementById('cl-canvas-container');
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+
+        function updateRendererSize() {
+            const width = container.clientWidth;
+            const height = container.clientHeight;
+            renderer.setSize(width, height);
+            camera.aspect = width / height;
+            camera.updateProjectionMatrix();
+        }
+
+        updateRendererSize();
+        renderer.setClearColor(0x000000, 0);
+        container.appendChild(renderer.domElement);
+
+        // Lighting
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+        scene.add(ambientLight);
+
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+        directionalLight.position.set(5, 5, 5);
+        scene.add(directionalLight);
+
+        const backLight = new THREE.DirectionalLight(0xffffff, 0.4);
+        backLight.position.set(-5, -5, -5);
+        scene.add(backLight);
+
+        // Create material and mesh for the cover letter
+        let clMesh;
+
+        // Load cover letter image as texture
+        function loadCLTexture(index, shouldMirror = false, callback) {
+            const template = clTemplates[index];
+            document.getElementById('cl-template-name').textContent = template.name;
+
+            const img = new Image();
+            img.onload = function() {
+                const canvasWidth = 1200;
+                const canvasHeight = 1697;
+
+                const canvas = document.createElement('canvas');
+                canvas.width = canvasWidth;
+                canvas.height = canvasHeight;
+                const ctx = canvas.getContext('2d');
+
+                ctx.fillStyle = 'white';
+                ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+
+                if (shouldMirror) {
+                    ctx.translate(canvasWidth, 0);
+                    ctx.scale(-1, 1);
+                    ctx.drawImage(img, 0, 0, canvasWidth, canvasHeight);
+                } else {
+                    ctx.drawImage(img, 0, 0, canvasWidth, canvasHeight);
+                }
+
+                const texture = new THREE.CanvasTexture(canvas);
+                texture.needsUpdate = true;
+
+                callback(texture, canvasWidth, canvasHeight);
+            };
+            img.src = template.file;
+        }
+
+        // Load and display cover letter
+        function loadCL(index) {
+            currentIndex = index;
+
+            loadCLTexture(index, false, (texture, width, height) => {
+                if (clMesh) {
+                    scene.remove(clMesh);
+                    if (clMesh.geometry) clMesh.geometry.dispose();
+                    if (clMesh.material.map) clMesh.material.map.dispose();
+                    if (clMesh.material) clMesh.material.dispose();
+                }
+
+                const aspectRatio = width / height;
+                const planeWidth = 2;
+                const planeHeight = planeWidth / aspectRatio;
+
+                const geometry = new THREE.PlaneGeometry(planeWidth, planeHeight);
+                const material = new THREE.MeshPhongMaterial({
+                    map: texture,
+                    side: THREE.DoubleSide,
+                    transparent: false
+                });
+
+                clMesh = new THREE.Mesh(geometry, material);
+                clMesh.rotation.y = 0;
+                scene.add(clMesh);
+
+                if (!isPaused) {
+                    animateRotation();
+                }
+            });
+        }
+
+        // Load next cover letter texture (for swap at 90 degrees)
+        function loadNextCLTexture(index, shouldMirror = false) {
+            currentIndex = index;
+            const template = clTemplates[index];
+            document.getElementById('cl-template-name').textContent = template.name;
+
+            loadCLTexture(index, shouldMirror, (texture) => {
+                if (clMesh.material.map) {
+                    clMesh.material.map.dispose();
+                }
+                clMesh.material.map = texture;
+                clMesh.material.needsUpdate = true;
+            });
+        }
+
+        // Animate rotation using GSAP
+        function animateRotation() {
+            if (isAnimating || isPaused) return;
+            isAnimating = true;
+            hasSwapped = false;
+
+            const startRotation = clMesh.rotation.y;
+            const targetRotation = startRotation + Math.PI;
+
+            gsap.to(clMesh.rotation, {
+                y: targetRotation,
+                duration: 2.5,
+                ease: "power2.inOut",
+                onUpdate: function() {
+                    const currentRotation = clMesh.rotation.y;
+                    const rotationProgress = currentRotation - startRotation;
+
+                    if (!hasSwapped && rotationProgress >= Math.PI / 2) {
+                        hasSwapped = true;
+
+                        const normalizedRotation = currentRotation % (Math.PI * 2);
+                        const shouldMirror = normalizedRotation < Math.PI;
+
+                        const nextIndex = (currentIndex + 1) % clTemplates.length;
+                        loadNextCLTexture(nextIndex, shouldMirror);
+                    }
+                },
+                onComplete: () => {
+                    clMesh.rotation.y = clMesh.rotation.y % (Math.PI * 2);
+                    rotationCycle++;
+                    isAnimating = false;
+
+                    setTimeout(() => {
+                        if (!isPaused) {
+                            animateRotation();
+                        }
+                    }, 1000);
+                }
+            });
+
+            gsap.to(clMesh.position, {
+                y: "+=0.2",
+                duration: 1.25,
+                yoyo: true,
+                repeat: 1,
+                ease: "sine.inOut"
+            });
+        }
+
+        // Animation loop
+        function animate() {
+            requestAnimationFrame(animate);
+            renderer.render(scene, camera);
+        }
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            updateRendererSize();
+        });
+
+        // Start the experience
+        loadCL(currentIndex);
+        animate();
+    </script>
+</body>
+</html>
