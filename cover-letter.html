@@ -335,11 +335,35 @@
         // Create material and mesh for the cover letter
         let clMesh;
 
-        // Load cover letter image as texture
-        function loadCLTexture(index, shouldMirror = false, callback) {
-            const template = clTemplates[index];
-            document.getElementById('cl-template-name').textContent = template.name;
+        // Preload all textures (normal and mirrored)
+        const textureCache = {
+            normal: [],
+            mirrored: []
+        };
+        let texturesLoaded = 0;
+        const totalTextures = clTemplates.length * 2; // normal + mirrored for each
 
+        // Preload textures function
+        function preloadTextures(callback) {
+            clTemplates.forEach((template, index) => {
+                // Load normal version
+                loadSingleTexture(template.file, false, (texture) => {
+                    textureCache.normal[index] = texture;
+                    texturesLoaded++;
+                    if (texturesLoaded === totalTextures) callback();
+                });
+
+                // Load mirrored version
+                loadSingleTexture(template.file, true, (texture) => {
+                    textureCache.mirrored[index] = texture;
+                    texturesLoaded++;
+                    if (texturesLoaded === totalTextures) callback();
+                });
+            });
+        }
+
+        // Load a single texture
+        function loadSingleTexture(filePath, shouldMirror, callback) {
             const img = new Image();
             img.onload = function() {
                 const canvasWidth = 1200;
@@ -364,57 +388,57 @@
                 const texture = new THREE.CanvasTexture(canvas);
                 texture.needsUpdate = true;
 
-                callback(texture, canvasWidth, canvasHeight);
+                callback(texture);
             };
-            img.src = template.file;
+            img.src = filePath;
         }
 
         // Load and display cover letter
         function loadCL(index) {
             currentIndex = index;
+            const texture = textureCache.normal[index];
 
-            loadCLTexture(index, false, (texture, width, height) => {
-                if (clMesh) {
-                    scene.remove(clMesh);
-                    if (clMesh.geometry) clMesh.geometry.dispose();
-                    if (clMesh.material.map) clMesh.material.map.dispose();
-                    if (clMesh.material) clMesh.material.dispose();
-                }
+            if (clMesh) {
+                scene.remove(clMesh);
+                if (clMesh.geometry) clMesh.geometry.dispose();
+                if (clMesh.material.map) clMesh.material.map.dispose();
+                if (clMesh.material) clMesh.material.dispose();
+            }
 
-                const aspectRatio = width / height;
-                const planeWidth = 2;
-                const planeHeight = planeWidth / aspectRatio;
+            const canvasWidth = 1200;
+            const canvasHeight = 1697;
+            const aspectRatio = canvasWidth / canvasHeight;
+            const planeWidth = 2;
+            const planeHeight = planeWidth / aspectRatio;
 
-                const geometry = new THREE.PlaneGeometry(planeWidth, planeHeight);
-                const material = new THREE.MeshPhongMaterial({
-                    map: texture,
-                    side: THREE.DoubleSide,
-                    transparent: false
-                });
-
-                clMesh = new THREE.Mesh(geometry, material);
-                clMesh.rotation.y = 0;
-                scene.add(clMesh);
-
-                if (!isPaused) {
-                    animateRotation();
-                }
+            const geometry = new THREE.PlaneGeometry(planeWidth, planeHeight);
+            const material = new THREE.MeshPhongMaterial({
+                map: texture,
+                side: THREE.DoubleSide,
+                transparent: false
             });
+
+            clMesh = new THREE.Mesh(geometry, material);
+            clMesh.rotation.y = 0;
+            scene.add(clMesh);
+
+            if (!isPaused) {
+                animateRotation();
+            }
         }
 
-        // Load next cover letter texture (for swap at 90 degrees)
+        // Load next cover letter texture (for swap at 90 degrees) - uses preloaded textures
         function loadNextCLTexture(index, shouldMirror = false) {
             currentIndex = index;
-            const template = clTemplates[index];
-            document.getElementById('cl-template-name').textContent = template.name;
 
-            loadCLTexture(index, shouldMirror, (texture) => {
-                if (clMesh.material.map) {
-                    clMesh.material.map.dispose();
-                }
-                clMesh.material.map = texture;
-                clMesh.material.needsUpdate = true;
-            });
+            // Get preloaded texture instantly
+            const texture = shouldMirror ? textureCache.mirrored[index] : textureCache.normal[index];
+
+            if (clMesh.material.map) {
+                clMesh.material.map.dispose();
+            }
+            clMesh.material.map = texture;
+            clMesh.material.needsUpdate = true;
         }
 
         // Animate rotation using GSAP
@@ -477,9 +501,11 @@
             updateRendererSize();
         });
 
-        // Start the experience
-        loadCL(currentIndex);
-        animate();
+        // Start the experience - preload all textures first
+        preloadTextures(() => {
+            loadCL(currentIndex);
+            animate();
+        });
     </script>
 </body>
 </html>

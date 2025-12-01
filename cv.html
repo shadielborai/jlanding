@@ -335,11 +335,35 @@
         // Create material and mesh for the CV
         let cvMesh;
 
-        // Load CV image as texture
-        function loadCVTexture(index, shouldMirror = false, callback) {
-            const template = cvTemplates[index];
-            document.getElementById('cv-template-name').textContent = template.name;
+        // Preload all textures (normal and mirrored)
+        const textureCache = {
+            normal: [],
+            mirrored: []
+        };
+        let texturesLoaded = 0;
+        const totalTextures = cvTemplates.length * 2; // normal + mirrored for each
 
+        // Preload textures function
+        function preloadTextures(callback) {
+            cvTemplates.forEach((template, index) => {
+                // Load normal version
+                loadSingleTexture(template.file, false, (texture) => {
+                    textureCache.normal[index] = texture;
+                    texturesLoaded++;
+                    if (texturesLoaded === totalTextures) callback();
+                });
+
+                // Load mirrored version
+                loadSingleTexture(template.file, true, (texture) => {
+                    textureCache.mirrored[index] = texture;
+                    texturesLoaded++;
+                    if (texturesLoaded === totalTextures) callback();
+                });
+            });
+        }
+
+        // Load a single texture
+        function loadSingleTexture(filePath, shouldMirror, callback) {
             const img = new Image();
             img.onload = function() {
                 const canvasWidth = 1200;
@@ -364,57 +388,57 @@
                 const texture = new THREE.CanvasTexture(canvas);
                 texture.needsUpdate = true;
 
-                callback(texture, canvasWidth, canvasHeight);
+                callback(texture);
             };
-            img.src = template.file;
+            img.src = filePath;
         }
 
         // Load and display CV
         function loadCV(index) {
             currentIndex = index;
+            const texture = textureCache.normal[index];
 
-            loadCVTexture(index, false, (texture, width, height) => {
-                if (cvMesh) {
-                    scene.remove(cvMesh);
-                    if (cvMesh.geometry) cvMesh.geometry.dispose();
-                    if (cvMesh.material.map) cvMesh.material.map.dispose();
-                    if (cvMesh.material) cvMesh.material.dispose();
-                }
+            if (cvMesh) {
+                scene.remove(cvMesh);
+                if (cvMesh.geometry) cvMesh.geometry.dispose();
+                if (cvMesh.material.map) cvMesh.material.map.dispose();
+                if (cvMesh.material) cvMesh.material.dispose();
+            }
 
-                const aspectRatio = width / height;
-                const planeWidth = 2;
-                const planeHeight = planeWidth / aspectRatio;
+            const canvasWidth = 1200;
+            const canvasHeight = 1697;
+            const aspectRatio = canvasWidth / canvasHeight;
+            const planeWidth = 2;
+            const planeHeight = planeWidth / aspectRatio;
 
-                const geometry = new THREE.PlaneGeometry(planeWidth, planeHeight);
-                const material = new THREE.MeshPhongMaterial({
-                    map: texture,
-                    side: THREE.DoubleSide,
-                    transparent: false
-                });
-
-                cvMesh = new THREE.Mesh(geometry, material);
-                cvMesh.rotation.y = 0;
-                scene.add(cvMesh);
-
-                if (!isPaused) {
-                    animateRotation();
-                }
+            const geometry = new THREE.PlaneGeometry(planeWidth, planeHeight);
+            const material = new THREE.MeshPhongMaterial({
+                map: texture,
+                side: THREE.DoubleSide,
+                transparent: false
             });
+
+            cvMesh = new THREE.Mesh(geometry, material);
+            cvMesh.rotation.y = 0;
+            scene.add(cvMesh);
+
+            if (!isPaused) {
+                animateRotation();
+            }
         }
 
-        // Load next CV texture (for swap at 90 degrees)
+        // Load next CV texture (for swap at 90 degrees) - uses preloaded textures
         function loadNextCVTexture(index, shouldMirror = false) {
             currentIndex = index;
-            const template = cvTemplates[index];
-            document.getElementById('cv-template-name').textContent = template.name;
 
-            loadCVTexture(index, shouldMirror, (texture) => {
-                if (cvMesh.material.map) {
-                    cvMesh.material.map.dispose();
-                }
-                cvMesh.material.map = texture;
-                cvMesh.material.needsUpdate = true;
-            });
+            // Get preloaded texture instantly
+            const texture = shouldMirror ? textureCache.mirrored[index] : textureCache.normal[index];
+
+            if (cvMesh.material.map) {
+                cvMesh.material.map.dispose();
+            }
+            cvMesh.material.map = texture;
+            cvMesh.material.needsUpdate = true;
         }
 
         // Animate rotation using GSAP
@@ -477,9 +501,11 @@
             updateRendererSize();
         });
 
-        // Start the experience
-        loadCV(currentIndex);
-        animate();
+        // Start the experience - preload all textures first
+        preloadTextures(() => {
+            loadCV(currentIndex);
+            animate();
+        });
     </script>
 </body>
 </html>
