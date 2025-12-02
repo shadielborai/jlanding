@@ -305,10 +305,11 @@
             0.1,
             1000
         );
-        camera.position.z = 3;
+        camera.position.z = 3.2; // Moved back to accommodate larger templates
 
         const container = document.getElementById('cl-canvas-container');
         const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Better quality on high-DPI displays
 
         function updateRendererSize() {
             const width = container.clientWidth;
@@ -322,17 +323,22 @@
         renderer.setClearColor(0x000000, 0);
         container.appendChild(renderer.domElement);
 
-        // Lighting
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+        // Much brighter lighting for better visibility
+        const ambientLight = new THREE.AmbientLight(0xffffff, 1.2);
         scene.add(ambientLight);
 
-        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 1.0);
         directionalLight.position.set(5, 5, 5);
         scene.add(directionalLight);
 
-        const backLight = new THREE.DirectionalLight(0xffffff, 0.4);
+        const backLight = new THREE.DirectionalLight(0xffffff, 0.8);
         backLight.position.set(-5, -5, -5);
         scene.add(backLight);
+
+        // Add front light for even better visibility
+        const frontLight = new THREE.DirectionalLight(0xffffff, 0.5);
+        frontLight.position.set(0, 0, 5);
+        scene.add(frontLight);
 
         // Create material and mesh for the cover letter
         let clMesh;
@@ -389,6 +395,10 @@
 
                 const texture = new THREE.CanvasTexture(canvas);
                 texture.needsUpdate = true;
+                // Improve texture quality
+                texture.minFilter = THREE.LinearFilter;
+                texture.magFilter = THREE.LinearFilter;
+                texture.anisotropy = 16; // Maximum anisotropic filtering for crisp textures
 
                 callback(texture);
             };
@@ -410,11 +420,12 @@
             const canvasWidth = 1200;
             const canvasHeight = 1697;
             const aspectRatio = canvasWidth / canvasHeight;
-            const planeWidth = 2;
+            const planeWidth = 2.8; // Increased from 2 to 2.8 for larger display
             const planeHeight = planeWidth / aspectRatio;
 
             const geometry = new THREE.PlaneGeometry(planeWidth, planeHeight);
-            const material = new THREE.MeshPhongMaterial({
+            // Use MeshBasicMaterial for full brightness without lighting effects
+            const material = new THREE.MeshBasicMaterial({
                 map: texture,
                 side: THREE.DoubleSide,
                 transparent: false
