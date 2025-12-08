@@ -75,6 +75,24 @@
     
     <!-- Blog Posts - Example entries (update these with actual blog posts) -->
     <url>
+        <loc>https://jobesta.com/blog/canvas-resume-builder.html</loc>
+        <lastmod>2025-12-08</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://jobesta.com/blog/ai-resume-builder.html</loc>
+        <lastmod>2025-12-08</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://jobesta.com/blog/free-resume-creation.html</loc>
+        <lastmod>2025-12-08</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
         <loc>https://jobesta.com/blog/first-job-interview-preparation-steps.html</loc>
         <lastmod>2025-10-24</lastmod>
         <changefreq>monthly</changefreq>
