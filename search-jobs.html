@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Discover your next career move with Jobesta's AI-powered job search. Get personalized job matches from millions of opportunities worldwide, tailored to your profile and delivered straight to your inbox.">
+    <meta name="keywords" content="AI job search, job finder, personalized job matches, career opportunities, job alerts, job recommendations">
+    <meta name="author" content="Jobesta">
+    <title>AI Job Search - Discover Your Next Career Move | Jobesta</title>
+    <link rel="canonical" href="https://jobesta.com/search-jobs.html">
+
+    <!-- Open Graph Tags for Social Sharing -->
+    <meta property="og:title" content="AI Job Search - Discover Your Next Career Move | Jobesta">
+    <meta property="og:description" content="Get personalized job matches from millions of opportunities worldwide with Jobesta's AI-powered job search.">
+    <meta property="og:url" content="https://jobesta.com/search-jobs.html">
+    <meta property="og:type" content="website">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="images/fav/favicon_16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/fav/favicon_32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="images/fav/favicon_48.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="images/fav/favicon_192.png">
+    <link rel="apple-touch-icon" sizes="256x256" href="images/fav/favicon_256.png">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PNTVD903V0"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('consent', 'default', {
+        'analytics_storage': 'denied',
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied'
+      });
+
+      gtag('consent', 'update', {
+        'analytics_storage': 'granted'
+      });
+
+      gtag('config', 'G-PNTVD903V0', {
+        'anonymize_ip': true,
+        'allow_ad_personalization_signals': false
+      });
+    </script>
+
+    <style>
+        /* Ensure hero fills viewport and has proper stacking */
+        .hero {
+            min-height: 100vh !important;
+            position: relative !important;
+            z-index: 1 !important;
+        }
+
+        /* Globe Canvas Container */
+        #globe-canvas-container {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            min-height: 500px;
+            max-width: 600px;
+            max-height: 600px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            margin: 0 auto;
+        }
+
+        .bold-section {
+            background: var(--jobesta-gray-10);
+            padding: 120px 0;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .bold-section .container {
+            width: 100%;
+        }
+
+        .bold-section h2 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--jobesta-gray-90);
+            margin-bottom: 2rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.3;
+        }
+
+        .bold-section p {
+            font-size: 1.4rem;
+            color: var(--jobesta-gray-80);
+            max-width: 750px;
+            margin: 0 auto;
+            line-height: 1.7;
+            font-weight: 500;
+        }
+
+        /* Notifications Section with Envelope */
+        .notifications-section {
+            padding: 120px 0;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+            background: var(--jobesta-gray-10);
+        }
+
+        .envelope-icon {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 40px;
+            animation: floatEnvelope 3s ease-in-out infinite;
+        }
+
+        @keyframes floatEnvelope {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .notification-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--jobesta-gray-90);
+            margin-bottom: 1.5rem;
+        }
+
+        .notification-description {
+            font-size: 1.3rem;
+            color: var(--jobesta-gray-80);
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            line-height: 1.7;
+            font-weight: 500;
+        }
+
+        /* Ensure sections stack properly */
+        .section {
+            position: relative;
+            z-index: 2;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                min-height: 100vh !important;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr !important;
+                gap: 30px !important;
+            }
+
+            #globe-canvas-container {
+                min-height: 400px;
+            }
+
+            .bold-section {
+                padding: 80px 20px;
+                min-height: 80vh;
+            }
+
+            .bold-section h2 {
+                font-size: 1.8rem;
+            }
+
+            .bold-section p {
+                font-size: 1.15rem;
+            }
+
+            .notifications-section {
+                padding: 80px 20px;
+                min-height: 80vh;
+            }
+
+            .notification-title {
+                font-size: 1.8rem;
+            }
+
+            .notification-description {
+                font-size: 1.1rem;
+            }
+
+            .envelope-icon {
+                width: 80px;
+                height: 80px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-left h1 {
+                font-size: 2rem !important;
+            }
+
+            .hero-left p {
+                font-size: 1rem !important;
+            }
+
+            .bold-section h2 {
+                font-size: 1.6rem;
+            }
+
+            .bold-section p {
+                font-size: 1.05rem;
+            }
+
+            .notification-title {
+                font-size: 1.5rem;
+            }
+
+            .notification-description {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav-wrapper">
+                <a href="index.html" class="logo">
+                    <span class="logo-bold">Job</span><span class="logo-light">esta</span>
+                </a>
+                <ul class="nav-menu">
+                    <li><a href="index.html#features" class="nav-link">Features</a></li>
+                    <li><a href="pricing.html" class="nav-link">Pricing</a></li>
+                    <li><a href="blog.html" class="nav-link">Blog</a></li>
+                    <li><a href="about.html" class="nav-link">About Us</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                    <li><a href="https://app.jobesta.com/login" class="btn btn-primary">Get Started</a></li>
+                </ul>
+                <div class="mobile-menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section with Rotating Globe -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-left">
+                    <h1>Discover your next career move in seconds</h1>
+                    <p>Our AI-powered platform delivers smart, personalized job matches from millions of opportunities worldwide — faster than ever. Join today and unlock a world of possibilities waiting for you.</p>
+                    <a href="https://app.jobesta.com/login" class="btn btn-primary">Get Started</a>
+                </div>
+                <div class="hero-right">
+                    <div id="globe-canvas-container"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Notifications Section with Envelope -->
+    <section class="notifications-section">
+        <div class="container">
+            <svg class="envelope-icon" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                <!-- Envelope Body -->
+                <path d="M8 16h48v32H8z" fill="none" stroke="var(--jobesta-blue)" stroke-width="2" stroke-linejoin="round"/>
+                <!-- Envelope Flap -->
+                <path d="M8 16l24 16 24-16" fill="none" stroke="var(--jobesta-blue)" stroke-width="2" stroke-linejoin="round"/>
+                <!-- Envelope Line -->
+                <line x1="8" y1="16" x2="32" y2="32" stroke="var(--jobesta-blue)" stroke-width="2"/>
+                <line x1="56" y1="16" x2="32" y2="32" stroke="var(--jobesta-blue)" stroke-width="2"/>
+            </svg>
+            <h2 class="notification-title">Job Notifications</h2>
+            <p class="notification-description">Get fresh, exciting opportunities delivered straight to your inbox — tailored to your interests and built to keep your career moving forward.</p>
+            <a href="https://app.jobesta.com/login" class="btn btn-primary">Get Started</a>
+        </div>
+    </section>
+
+    <!-- AI Profile Section with Typing Effect -->
+    <section class="section fade-in">
+        <div class="container">
+            <div class="typing-section-wrapper">
+                <h2 class="typing-title" data-text="Let AI Match You With Your Dream Job"></h2>
+                <p class="typing-description" data-text="Our intelligent matching algorithm analyzes your profile, skills, and career goals to find the perfect opportunities — no more endless scrolling, just jobs tailored for you."></p>
+                <a href="https://app.jobesta.com/login" class="btn btn-primary" style="margin-top: 30px;">Get Started</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="cta-section">
+        <div class="cta-background">
+            <img src="images/people.webp" alt="Professionals collaborating">
+        </div>
+        <div class="cta-overlay"></div>
+        <div class="cta-content">
+            <h2>Join hundreds of thousands of professionals leveraging AI to discover job opportunities tailored precisely to their needs.</h2>
+            <a href="https://app.jobesta.com/login" class="btn btn-primary">Get Started</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3><span style="font-weight: 900;">Job</span><span style="font-weight: 200;">esta</span></h3>
+                    <p>Land your dream job faster</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="blog.html">Blogs</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Features</h3>
+                    <ul class="footer-links">
+                        <li><a href="cv.html">CV Generator</a></li>
+                        <li><a href="cover-letter.html">Cover Letter Generator</a></li>
+                        <li><a href="search-jobs.html">Search Jobs</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Compliance</h3>
+                    <ul class="footer-links">
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Newsletter</h3>
+                    <p>Stay updated with the latest job search tips and features</p>
+                    <form class="newsletter-form" id="newsletterForm">
+                        <input type="email" class="newsletter-input" placeholder="Enter your email" id="newsletterEmail">
+                        <button type="submit" class="newsletter-btn" id="newsletterBtn" disabled>Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 Jobesta, All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <!-- Typed.js -->
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+
+    <!-- Main JavaScript -->
+    <script src="js/main.js"></script>
+
+    <!-- Globe Rotation Script -->
+    <script>
+        // Scene setup for globe
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+
+        const container = document.getElementById('globe-canvas-container');
+        if (container) {
+            const width = container.clientWidth;
+            const height = Math.min(width, container.clientHeight);
+            renderer.setSize(width, height);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.setClearColor(0x000000, 0);
+            container.appendChild(renderer.domElement);
+
+            camera.aspect = width / height;
+            camera.updateProjectionMatrix();
+            camera.position.z = 2.5;
+
+            // Create globe group
+            const globeGroup = new THREE.Group();
+            globeGroup.rotation.y = -Math.PI * 0.3;
+            scene.add(globeGroup);
+
+            // Lighting
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+            scene.add(ambientLight);
+
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
+            directionalLight.position.set(5, 3, 5);
+            scene.add(directionalLight);
+
+            // Add atmosphere effect (Jobesta blue)
+            const atmosphereGeometry = new THREE.SphereGeometry(1.02, 64, 64);
+            const atmosphereMaterial = new THREE.MeshPhongMaterial({
+                color: 0x70b5f9,
+                emissive: 0x0a66c2,
+                shininess: 5,
+                transparent: true,
+                opacity: 0.15,
+                side: THREE.BackSide
+            });
+            const atmosphere = new THREE.Mesh(atmosphereGeometry, atmosphereMaterial);
+            globeGroup.add(atmosphere);
+
+            // Add an occluder sphere to hide back-side borders
+            const occluderGeometry = new THREE.SphereGeometry(0.99, 64, 64);
+            const occluderMaterial = new THREE.MeshBasicMaterial({
+                color: 0x004182,
+                side: THREE.FrontSide,
+                depthWrite: true,
+                depthTest: true
+            });
+            const occluder = new THREE.Mesh(occluderGeometry, occluderMaterial);
+            globeGroup.add(occluder);
+
+            // Add particles
+            const particleCount = 300;
+            const particleGeometry = new THREE.BufferGeometry();
+            const particlePositions = new Float32Array(particleCount * 3);
+
+            for (let i = 0; i < particleCount; i++) {
+                const theta = Math.random() * Math.PI * 2;
+                const phi = Math.random() * Math.PI;
+                const radius = 1.0 + Math.random() * 0.15;
+
+                particlePositions[i * 3] = radius * Math.sin(phi) * Math.cos(theta);
+                particlePositions[i * 3 + 1] = radius * Math.cos(phi);
+                particlePositions[i * 3 + 2] = radius * Math.sin(phi) * Math.sin(theta);
+            }
+
+            particleGeometry.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
+            const particleMaterial = new THREE.PointsMaterial({
+                color: 0x70b5f9,
+                size: 0.008,
+                sizeAttenuation: true,
+                transparent: true,
+                opacity: 0.6
+            });
+            const particles = new THREE.Points(particleGeometry, particleMaterial);
+            globeGroup.add(particles);
+
+            // Animation variables
+            let lastFrameTime = performance.now();
+            let frameCount = 0;
+
+            // Mouse interaction
+            let mouseX = 0;
+            let mouseY = 0;
+            let targetRotationX = 0;
+            let targetRotationY = 0;
+
+            document.addEventListener('mousemove', (event) => {
+                mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+                mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+
+                targetRotationY = mouseX * Math.PI * 0.4;
+                targetRotationX = mouseY * Math.PI * 0.25;
+            });
+
+            // Animation loop
+            function animate() {
+                requestAnimationFrame(animate);
+
+                // Continuous automatic rotation (Y-axis for spinning)
+                globeGroup.rotation.y += 0.0005;
+
+                // Apply mouse interaction on top of automatic rotation
+                globeGroup.rotation.x += (targetRotationX - globeGroup.rotation.x) * 0.04;
+
+                // Rotate particles
+                if (particles) {
+                    particles.rotation.y -= 0.00005;
+                }
+
+                renderer.render(scene, camera);
+
+                // FPS calculation
+                frameCount++;
+                const now = performance.now();
+                if (now - lastFrameTime >= 1000) {
+                    frameCount = 0;
+                    lastFrameTime = now;
+                }
+            }
+
+            animate();
+
+            // Load coastline data from Natural Earth
+            const lineMaterial = new THREE.LineBasicMaterial({
+                color: 0xaaaaaa,
+                linewidth: 1.5
+            });
+
+            function latLonToVector3(lat, lon) {
+                const radius = 1.0;
+                const phi = (90 - lat) * Math.PI / 180;
+                const theta = (lon + 180) * Math.PI / 180;
+
+                return new THREE.Vector3(
+                    -(radius * Math.sin(phi) * Math.cos(theta)),
+                    radius * Math.cos(phi),
+                    radius * Math.sin(phi) * Math.sin(theta)
+                );
+            }
+
+            // Fetch and render accurate coastline data
+            fetch('https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_110m_coastline.geojson')
+                .then(response => response.json())
+                .then(data => {
+                    data.features.forEach(feature => {
+                        if (feature.geometry.type === 'LineString') {
+                            const coordinates = feature.geometry.coordinates;
+                            const points = coordinates.map(([lon, lat]) => latLonToVector3(lat, lon));
+
+                            if (points.length > 1) {
+                                const geometry = new THREE.BufferGeometry().setFromPoints(points);
+                                const line = new THREE.Line(geometry, lineMaterial);
+                                globeGroup.add(line);
+                            }
+                        } else if (feature.geometry.type === 'MultiLineString') {
+                            feature.geometry.coordinates.forEach(lineCoordinates => {
+                                const points = lineCoordinates.map(([lon, lat]) => latLonToVector3(lat, lon));
+                                if (points.length > 1) {
+                                    const geometry = new THREE.BufferGeometry().setFromPoints(points);
+                                    const line = new THREE.Line(geometry, lineMaterial);
+                                    globeGroup.add(line);
+                                }
+                            });
+                        }
+                    });
+                })
+                .catch(error => {
+                    console.error('Error loading coastline data:', error);
+                });
+
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                const newWidth = container.clientWidth;
+                const newHeight = Math.min(newWidth, container.clientHeight);
+                camera.aspect = newWidth / newHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(newWidth, newHeight);
+            });
+
+            // Reset on double click
+            document.addEventListener('dblclick', () => {
+                globeGroup.rotation.x = 0;
+                globeGroup.rotation.y = -Math.PI * 0.3;
+                globeGroup.rotation.z = 0;
+            });
+        }
+    </script>
+</body>
+</html>
