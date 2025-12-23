@@ -147,6 +147,7 @@ a:hover {
 
 .btn-primary:hover {
   background: var(--jobesta-darkblue);
+  color: var(--jobesta-white);
   transform: translateY(-2px);
   box-shadow: 0 10px 20px rgba(10, 102, 194, 0.2);
 }
