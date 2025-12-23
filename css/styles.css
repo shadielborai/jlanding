@@ -537,38 +537,44 @@ a:hover {
 }
 
 .trust-badges {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-  padding: 40px 0;
-  border-top: 1px solid var(--jobesta-gray-70);
-  margin-bottom: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  padding: 32px 0;
+  border-top: 1px solid var(--jobesta-gray-80);
+  margin-bottom: 0;
 }
 
 .trust-item {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  text-align: center;
-  gap: 0.75rem;
+  gap: 8px;
+  padding: 8px 16px;
+  background: var(--jobesta-gray-95);
+  border-radius: 6px;
+  border: 1px solid var(--jobesta-gray-85);
 }
 
 .trust-icon {
-  color: var(--jobesta-blue);
-  width: 32px;
-  height: 32px;
+  color: var(--jobesta-gray-40);
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
 }
 
 .trust-item p {
-  color: var(--jobesta-gray-50);
-  font-size: 0.9rem;
+  color: var(--jobesta-gray-30);
+  font-size: 0.875rem;
   margin: 0;
   font-weight: 500;
+  white-space: nowrap;
 }
 
 .footer-bottom {
   text-align: center;
-  padding-top: 20px;
+  padding-top: 32px;
   border-top: 1px solid var(--jobesta-gray-70);
   color: var(--jobesta-gray-60);
   font-size: 0.9rem;
@@ -974,9 +980,8 @@ a:hover {
   }
 
   .trust-badges {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-    padding: 30px 0;
+    gap: 12px;
+    padding: 24px 0;
   }
 
   .pricing-cards {
