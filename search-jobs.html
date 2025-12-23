@@ -409,6 +409,71 @@
 
     <!-- Globe Rotation Script -->
     <script>
+        // Premium briefcase SVG icon in Jobesta blue
+        const briefcaseSVG = `data:image/svg+xml,${encodeURIComponent(`
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+                <defs>
+                    <linearGradient id="briefcaseGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#1a8fff;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#0a66c2;stop-opacity:1" />
+                    </linearGradient>
+                    <linearGradient id="handleGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#3da3ff;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#1a8fff;stop-opacity:1" />
+                    </linearGradient>
+                    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+                        <feDropShadow dx="0" dy="2" stdDeviation="2" flood-opacity="0.5"/>
+                    </filter>
+                    <filter id="innerShadow" x="-50%" y="-50%" width="200%" height="200%">
+                        <feGaussianBlur in="SourceAlpha" stdDeviation="1"/>
+                        <feOffset dx="0" dy="1" result="offsetblur"/>
+                        <feFlood flood-color="#000000" flood-opacity="0.3"/>
+                        <feComposite in2="offsetblur" operator="in"/>
+                    </filter>
+                </defs>
+
+                <!-- Main briefcase body with gradient -->
+                <rect x="3" y="11" width="26" height="16" rx="2.5" fill="url(#briefcaseGrad)" filter="url(#shadow)"/>
+
+                <!-- Top shine/highlight -->
+                <rect x="3" y="11" width="26" height="4" rx="2.5" fill="#ffffff" opacity="0.35"/>
+
+                <!-- Center divider line for realism -->
+                <line x1="16" y1="11" x2="16" y2="27" stroke="#084a91" stroke-width="0.5" opacity="0.6"/>
+
+                <!-- Horizontal accent line -->
+                <rect x="3" y="18.5" width="26" height="1" fill="#084a91" opacity="0.4"/>
+
+                <!-- Handle (modern rounded design) -->
+                <path d="M 10 11 Q 10 5 16 5 Q 22 5 22 11"
+                      fill="none"
+                      stroke="url(#handleGrad)"
+                      stroke-width="2.5"
+                      stroke-linecap="round"/>
+
+                <!-- Handle grip detail -->
+                <path d="M 12 8 Q 16 6 20 8"
+                      fill="none"
+                      stroke="#5bb3ff"
+                      stroke-width="1.5"
+                      stroke-linecap="round"/>
+
+                <!-- Lock/latch (modern minimal design) -->
+                <rect x="14.5" y="17.5" width="3" height="4" rx="1" fill="#5bb3ff"/>
+                <circle cx="16" cy="19.5" r="0.8" fill="#084a91"/>
+
+                <!-- Corner details for depth -->
+                <circle cx="6" cy="14" r="0.8" fill="#3da3ff" opacity="0.7"/>
+                <circle cx="26" cy="14" r="0.8" fill="#3da3ff" opacity="0.7"/>
+                <circle cx="6" cy="24" r="0.8" fill="#0a66c2" opacity="0.7"/>
+                <circle cx="26" cy="24" r="0.8" fill="#0a66c2" opacity="0.7"/>
+
+                <!-- Side panel shadows for 3D effect -->
+                <rect x="3" y="11" width="2" height="16" rx="2.5" fill="#000000" opacity="0.15"/>
+                <rect x="27" y="11" width="2" height="16" rx="2.5" fill="#ffffff" opacity="0.2"/>
+            </svg>
+        `)}`;
+
         // Scene setup for globe
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -440,11 +505,11 @@
             directionalLight.position.set(5, 3, 5);
             scene.add(directionalLight);
 
-            // Add atmosphere effect (Jobesta blue)
+            // Add atmosphere effect (grey instead of blue)
             const atmosphereGeometry = new THREE.SphereGeometry(1.02, 64, 64);
             const atmosphereMaterial = new THREE.MeshPhongMaterial({
-                color: 0x70b5f9,
-                emissive: 0x0a66c2,
+                color: 0xcccccc,
+                emissive: 0x888888,
                 shininess: 5,
                 transparent: true,
                 opacity: 0.15,
@@ -456,7 +521,7 @@
             // Add an occluder sphere to hide back-side borders
             const occluderGeometry = new THREE.SphereGeometry(0.99, 64, 64);
             const occluderMaterial = new THREE.MeshBasicMaterial({
-                color: 0x004182,
+                color: 0x3a3a3a,
                 side: THREE.FrontSide,
                 depthWrite: true,
                 depthTest: true
@@ -481,7 +546,7 @@
 
             particleGeometry.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
             const particleMaterial = new THREE.PointsMaterial({
-                color: 0x70b5f9,
+                color: 0xaaaaaa,
                 size: 0.008,
                 sizeAttenuation: true,
                 transparent: true,
@@ -490,48 +555,102 @@
             const particles = new THREE.Points(particleGeometry, particleMaterial);
             globeGroup.add(particles);
 
-            // Animation variables
-            let lastFrameTime = performance.now();
-            let frameCount = 0;
+            // Helper function for lat/lon to 3D conversion
+            function latLonToVector3(lat, lon, radius) {
+                const phi = (90 - lat) * (Math.PI / 180);
+                const theta = (lon + 180) * (Math.PI / 180);
 
-            // Mouse interaction
-            let mouseX = 0;
-            let mouseY = 0;
-            let targetRotationX = 0;
-            let targetRotationY = 0;
+                const x = -(radius * Math.sin(phi) * Math.cos(theta));
+                const z = (radius * Math.sin(phi) * Math.sin(theta));
+                const y = (radius * Math.cos(phi));
 
-            document.addEventListener('mousemove', (event) => {
-                mouseX = (event.clientX / window.innerWidth) * 2 - 1;
-                mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+                return new THREE.Vector3(x, y, z);
+            }
 
-                targetRotationY = mouseX * Math.PI * 0.4;
-                targetRotationX = mouseY * Math.PI * 0.25;
-            });
+            // Emanating jobs implementation
+            const textureLoader = new THREE.TextureLoader();
+            const briefcaseTexture = textureLoader.load(briefcaseSVG);
+            const emanatingJobs = [];
+            const maxJobs = 20;
+
+            function createEmanatingJob() {
+                // Random position - start from INSIDE the globe (radius 0.3 to 0.8)
+                const lat = (Math.random() - 0.5) * 180;
+                const lon = (Math.random() - 0.5) * 360;
+                const startRadius = 0.3 + Math.random() * 0.5;
+                const startPos = latLonToVector3(lat, lon, startRadius);
+
+                const spriteMaterial = new THREE.SpriteMaterial({
+                    map: briefcaseTexture,
+                    color: 0xffffff,
+                    transparent: true,
+                    opacity: 1
+                });
+
+                const sprite = new THREE.Sprite(spriteMaterial);
+                sprite.position.copy(startPos);
+                sprite.scale.set(0.06, 0.06, 1);
+
+                const direction = startPos.clone().normalize();
+
+                sprite.userData = {
+                    direction: direction,
+                    speed: 0.12 + Math.random() * 0.08,
+                    lifetime: 0,
+                    maxLifetime: 5.0
+                };
+
+                globeGroup.add(sprite);
+                emanatingJobs.push(sprite);
+            }
+
+            // Spawn initial jobs
+            for (let i = 0; i < maxJobs; i++) {
+                setTimeout(() => createEmanatingJob(), i * 200);
+            }
 
             // Animation loop
             function animate() {
                 requestAnimationFrame(animate);
 
-                // Continuous automatic rotation (Y-axis for spinning)
-                globeGroup.rotation.y += 0.0005;
-
-                // Apply mouse interaction on top of automatic rotation
-                globeGroup.rotation.x += (targetRotationX - globeGroup.rotation.x) * 0.04;
+                // Continuous automatic rotation
+                globeGroup.rotation.y += 0.001;
 
                 // Rotate particles
                 if (particles) {
                     particles.rotation.y -= 0.00005;
                 }
 
-                renderer.render(scene, camera);
+                // Animate emanating jobs
+                emanatingJobs.forEach((job, index) => {
+                    job.userData.lifetime += 0.016;
 
-                // FPS calculation
-                frameCount++;
-                const now = performance.now();
-                if (now - lastFrameTime >= 1000) {
-                    frameCount = 0;
-                    lastFrameTime = now;
-                }
+                    const progress = job.userData.lifetime / job.userData.maxLifetime;
+
+                    if (progress >= 1) {
+                        // Remove and create new job
+                        globeGroup.remove(job);
+                        emanatingJobs.splice(index, 1);
+
+                        if (emanatingJobs.length < maxJobs) {
+                            createEmanatingJob();
+                        }
+                    } else {
+                        // Move outward
+                        job.position.add(
+                            job.userData.direction.clone().multiplyScalar(job.userData.speed * 0.016)
+                        );
+
+                        // Fade out as it moves away
+                        job.material.opacity = 1 - progress;
+
+                        // Slight scale increase
+                        const scale = 0.06 * (1 + progress * 0.3);
+                        job.scale.set(scale, scale, 1);
+                    }
+                });
+
+                renderer.render(scene, camera);
             }
 
             animate();
@@ -542,18 +661,6 @@
                 linewidth: 1.5
             });
 
-            function latLonToVector3(lat, lon) {
-                const radius = 1.0;
-                const phi = (90 - lat) * Math.PI / 180;
-                const theta = (lon + 180) * Math.PI / 180;
-
-                return new THREE.Vector3(
-                    -(radius * Math.sin(phi) * Math.cos(theta)),
-                    radius * Math.cos(phi),
-                    radius * Math.sin(phi) * Math.sin(theta)
-                );
-            }
-
             // Fetch and render accurate coastline data
             fetch('https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_110m_coastline.geojson')
                 .then(response => response.json())
@@ -561,7 +668,7 @@
                     data.features.forEach(feature => {
                         if (feature.geometry.type === 'LineString') {
                             const coordinates = feature.geometry.coordinates;
-                            const points = coordinates.map(([lon, lat]) => latLonToVector3(lat, lon));
+                            const points = coordinates.map(([lon, lat]) => latLonToVector3(lat, lon, 1.0));
 
                             if (points.length > 1) {
                                 const geometry = new THREE.BufferGeometry().setFromPoints(points);
@@ -570,7 +677,7 @@
                             }
                         } else if (feature.geometry.type === 'MultiLineString') {
                             feature.geometry.coordinates.forEach(lineCoordinates => {
-                                const points = lineCoordinates.map(([lon, lat]) => latLonToVector3(lat, lon));
+                                const points = lineCoordinates.map(([lon, lat]) => latLonToVector3(lat, lon, 1.0));
                                 if (points.length > 1) {
                                     const geometry = new THREE.BufferGeometry().setFromPoints(points);
                                     const line = new THREE.Line(geometry, lineMaterial);
