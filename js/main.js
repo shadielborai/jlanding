@@ -563,13 +563,103 @@ function initJobTrackerAnimation() {
     }
 }
 
+// GA4 Event Tracking Functions
+function initGA4Tracking() {
+    // Track all CTA button clicks
+    document.querySelectorAll('.btn-primary, .btn-secondary').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            const buttonText = this.textContent.trim();
+            const buttonLocation = this.closest('section')?.className || this.closest('header') ? 'header' : 'footer';
+            const destinationUrl = this.href || this.getAttribute('onclick');
+
+            // Send event to GA4
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'cta_click', {
+                    'button_text': buttonText,
+                    'button_location': buttonLocation,
+                    'destination_url': destinationUrl
+                });
+            }
+        });
+    });
+
+    // Track scroll depth (at 25%, 50%, 75%, 100%)
+    let scrollDepth = 0;
+    let scrollTracked = {25: false, 50: false, 75: false, 100: false};
+
+    window.addEventListener('scroll', () => {
+        const windowHeight = window.innerHeight;
+        const documentHeight = document.documentElement.scrollHeight;
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const scrollPercent = Math.round((scrollTop / (documentHeight - windowHeight)) * 100);
+
+        // Track milestones
+        [25, 50, 75, 100].forEach(milestone => {
+            if (scrollPercent >= milestone && !scrollTracked[milestone]) {
+                scrollTracked[milestone] = true;
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'scroll', {
+                        'percent_scrolled': milestone
+                    });
+                }
+            }
+        });
+    });
+
+    // Track newsletter signup success
+    const originalSubscribeHandler = window.subscribeNewsletter;
+    if (typeof originalSubscribeHandler === 'function') {
+        window.subscribeNewsletter = async function() {
+            const result = await originalSubscribeHandler.apply(this, arguments);
+            if (result && typeof gtag !== 'undefined') {
+                gtag('event', 'generate_lead', {
+                    'method': 'newsletter_footer',
+                    'value': 1
+                });
+            }
+            return result;
+        };
+    }
+
+    // Track pricing page views
+    if (window.location.pathname.includes('pricing')) {
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'view_item', {
+                'item_category': 'pricing',
+                'item_name': 'pricing_page_view'
+            });
+        }
+    }
+
+    // Track feature page views
+    const featurePages = {
+        'cv.html': 'cv_generator',
+        'cover-letter.html': 'cover_letter_generator',
+        'search-jobs.html': 'job_search'
+    };
+
+    Object.keys(featurePages).forEach(page => {
+        if (window.location.pathname.includes(page)) {
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'page_view', {
+                    'page_title': featurePages[page],
+                    'page_location': window.location.href
+                });
+            }
+        }
+    });
+}
+
 // Initialize on DOM load
 document.addEventListener('DOMContentLoaded', () => {
     // Add any initialization code here
     console.log('Jobesta Landing Page Loaded');
-    
+
     // Initialize new features
     initJobSearchChat();
     initTypingEffect();
     initJobTrackerAnimation();
+
+    // Initialize GA4 tracking
+    initGA4Tracking();
 });

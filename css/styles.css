@@ -195,6 +195,18 @@ a:hover {
   align-items: center;
 }
 
+.hero-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--jobesta-blue), var(--jobesta-lightblue));
+  color: var(--jobesta-white);
+  padding: 0.5rem 1.25rem;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 12px rgba(10, 102, 194, 0.2);
+}
+
 .hero-left h1 {
   font-size: 3.5rem;
   color: var(--jobesta-gray-90);
@@ -207,6 +219,16 @@ a:hover {
   color: var(--jobesta-gray-70);
   margin-bottom: 2rem;
   line-height: 1.6;
+}
+
+.trust-message {
+  font-size: 1rem;
+  color: var(--jobesta-gray-70);
+  margin-bottom: 2rem;
+  font-weight: 500;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
 }
 
 .hero-right {
@@ -514,6 +536,36 @@ a:hover {
   cursor: not-allowed;
 }
 
+.trust-badges {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  padding: 40px 0;
+  border-top: 1px solid var(--jobesta-gray-70);
+  margin-bottom: 40px;
+}
+
+.trust-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.75rem;
+}
+
+.trust-icon {
+  color: var(--jobesta-blue);
+  width: 32px;
+  height: 32px;
+}
+
+.trust-item p {
+  color: var(--jobesta-gray-50);
+  font-size: 0.9rem;
+  margin: 0;
+  font-weight: 500;
+}
+
 .footer-bottom {
   text-align: center;
   padding-top: 20px;
@@ -527,6 +579,22 @@ a:hover {
   text-align: center;
   padding: 120px 0 60px;
   background: var(--jobesta-gray-20);
+}
+
+.pricing-notice {
+  background: linear-gradient(135deg, rgba(10, 102, 194, 0.1), rgba(112, 181, 249, 0.1));
+  border-left: 4px solid var(--jobesta-blue);
+  padding: 1.25rem 1.5rem;
+  margin: 2rem auto 0;
+  max-width: 700px;
+  border-radius: 8px;
+  font-size: 1.05rem;
+  color: var(--jobesta-gray-90);
+}
+
+.pricing-notice strong {
+  color: var(--jobesta-blue);
+  font-weight: 600;
 }
 
 .pricing-header h1 {
@@ -888,9 +956,27 @@ a:hover {
     direction: ltr;
   }
 
+  .trust-message {
+    flex-direction: column;
+    gap: 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  .hero-badge {
+    font-size: 0.8rem;
+    padding: 0.4rem 1rem;
+    text-align: center;
+  }
+
   .footer-content {
     grid-template-columns: 1fr;
     gap: 30px;
+  }
+
+  .trust-badges {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    padding: 30px 0;
   }
 
   .pricing-cards {
@@ -1527,13 +1613,51 @@ a:hover {
   margin: 0 auto;
 }
 
+.cta-badge {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  color: var(--jobesta-white);
+  padding: 0.5rem 1.25rem;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
 .cta-content h2 {
   color: var(--jobesta-white);
   font-size: 2.5rem;
   font-weight: 700;
   line-height: 1.3;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.cta-description {
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.cta-benefits {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  max-width: 700px;
+  margin: 0 auto 2.5rem;
+  text-align: left;
+}
+
+.benefit {
+  color: var(--jobesta-white);
+  font-size: 1rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .cta-content .btn {
@@ -1542,20 +1666,61 @@ a:hover {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
+.btn-large {
+  font-size: 1.2rem !important;
+  padding: 1.25rem 3rem !important;
+}
+
+.cta-subtext {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  margin-bottom: 0;
+}
+
 @media (max-width: 768px) {
   .cta-section {
     min-height: 350px;
     padding: 80px 20px;
   }
 
+  .cta-badge {
+    font-size: 0.8rem;
+    padding: 0.4rem 1rem;
+  }
+
   .cta-content h2 {
     font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+
+  .cta-description {
+    font-size: 1.1rem;
     margin-bottom: 1.5rem;
+  }
+
+  .cta-benefits {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+  }
+
+  .benefit {
+    font-size: 0.95rem;
   }
 
   .cta-content .btn {
     font-size: 1rem;
     padding: 0.875rem 2rem;
+  }
+
+  .btn-large {
+    font-size: 1.1rem !important;
+    padding: 1rem 2.25rem !important;
+  }
+
+  .cta-subtext {
+    font-size: 0.85rem;
   }
 }
 
