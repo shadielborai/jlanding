@@ -44,7 +44,7 @@ if (document.getElementById('chatMessages')) {
         {
             greeting: 'Hi there! What can I assist you with?',
             user: 'Put together a CV for me that\'s tailored to this job.',
-            ai: 'Perfect! I\'ll create a customized, ATS-friendly CV that highlights your most relevant experience for this specific position. Just share the job description, and I\'ll tailor your CV to match the requirements and keywords.'
+            ai: 'Perfect! I\'ll create a customized, ATS-friendly CV that highlights your most relevant experience for this specific position. Just share the job URL, and I\'ll tailor your CV to match the requirements and keywords.'
         },
         {
             greeting: 'Hey! Ready to boost your career?',
