@@ -1828,8 +1828,14 @@ a:hover {
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  transition: box-shadow 0.3s ease;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
   cursor: pointer;
+}
+
+.cv-sample:hover,
+.cl-sample:hover {
+  box-shadow: 0 8px 30px rgba(10, 102, 194, 0.3), 0 0 20px rgba(10, 102, 194, 0.4);
+  transform: translateY(-5px);
 }
 
 .cv-sample img,
