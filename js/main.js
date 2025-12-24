@@ -297,17 +297,38 @@ document.querySelectorAll('.btn').forEach(button => {
 const header = document.querySelector('.header');
 let lastScroll = 0;
 
-window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset;
-    
-    if (currentScroll > 100) {
-        header.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
-    } else {
-        header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.05)';
-    }
-    
-    lastScroll = currentScroll;
-});
+// Check if we're on pages that should always have white header
+const currentPath = window.location.pathname;
+const alwaysWhitePages = [
+    '/about.html',
+    '/contact.html',
+    '/terms.html',
+    '/privacy.html'
+];
+
+// Check if it's an individual blog post (e.g., /blog/post-name.html) but NOT the blog listing page
+const isIndividualBlogPost = currentPath.includes('/blog/') && currentPath !== '/blog.html';
+
+// Pages that should always have white header
+const shouldAlwaysBeWhite = alwaysWhitePages.some(page => currentPath.endsWith(page)) || isIndividualBlogPost;
+
+if (shouldAlwaysBeWhite) {
+    // Always keep header white on these pages
+    header.classList.add('header-scrolled');
+} else {
+    // On other pages (landing, blog listing, etc.), toggle header style on scroll
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
+
+        if (currentScroll > 50) {
+            header.classList.add('header-scrolled');
+        } else {
+            header.classList.remove('header-scrolled');
+        }
+
+        lastScroll = currentScroll;
+    });
+}
 
 // Job Search Chat (Section 2)
 function initJobSearchChat() {

@@ -75,13 +75,19 @@ a:hover {
 
 /* Header Styles */
 .header {
-  background: var(--jobesta-white);
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  background: var(--jobesta-gray-20);
+  box-shadow: none;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.header.header-scrolled {
+  background: var(--jobesta-white);
+  box-shadow: 0 2px 20px rgba(0,0,0,0.1);
 }
 
 .nav-wrapper {
