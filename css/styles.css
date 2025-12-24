@@ -1777,3 +1777,147 @@ a:hover {
     object-position: center center;
   }
 }
+
+/* CV and Cover Letter Sections Styles */
+.feature-highlights {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.feature-highlights li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 1rem;
+  color: var(--jobesta-gray-80);
+  line-height: 1.5;
+}
+
+.feature-highlights svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* CV Samples Container */
+.cv-samples-container,
+.cl-samples-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  width: 100%;
+  padding: 20px;
+  perspective: 1000px;
+  height: auto;
+}
+
+/* Override fixed height for CV/CL sections */
+.cv-section .section-image,
+.cl-section .section-image {
+  height: auto;
+  min-height: 400px;
+}
+
+.cv-sample,
+.cl-sample {
+  position: relative;
+  background: var(--jobesta-white);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.cv-sample img,
+.cl-sample img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Staggered animation delays */
+.cv-sample-1,
+.cl-sample-1 {
+  animation-delay: 0.1s;
+}
+
+.cv-sample-2,
+.cl-sample-2 {
+  animation-delay: 0.3s;
+}
+
+.cv-sample-3,
+.cl-sample-3 {
+  animation-delay: 0.5s;
+}
+
+/* Floating animation for both CV and CL samples */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.cv-sample,
+.cl-sample {
+  animation: float 3s ease-in-out infinite;
+}
+
+.cv-sample-1,
+.cl-sample-1 {
+  animation-delay: 0s;
+}
+
+.cv-sample-2,
+.cl-sample-2 {
+  animation-delay: 0.5s;
+}
+
+.cv-sample-3,
+.cl-sample-3 {
+  animation-delay: 1s;
+}
+
+/* Responsive design for CV and CL sections */
+@media (max-width: 768px) {
+  .cv-samples-container,
+  .cl-samples-container {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    padding: 10px;
+  }
+
+  .feature-highlights {
+    margin-bottom: 1.5rem;
+  }
+
+  .feature-highlights li {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .cv-samples-container,
+  .cl-samples-container {
+    grid-template-columns: repeat(3, 1fr);
+    padding: 5px;
+    gap: 10px;
+  }
+
+  .feature-highlights li {
+    font-size: 0.9rem;
+    gap: 10px;
+  }
+
+  .feature-highlights svg {
+    width: 18px;
+    height: 18px;
+  }
+}

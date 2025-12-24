@@ -650,6 +650,67 @@ function initGA4Tracking() {
     });
 }
 
+// CV and Cover Letter Samples Animation
+function initCVCLAnimations() {
+    const cvSamplesContainer = document.getElementById('cvSamplesContainer');
+    const clSamplesContainer = document.getElementById('clSamplesContainer');
+
+    if (!cvSamplesContainer && !clSamplesContainer) return;
+
+    let cvAnimationPlayed = false;
+    let clAnimationPlayed = false;
+
+    // Observer for CV samples
+    if (cvSamplesContainer) {
+        const cvObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !cvAnimationPlayed) {
+                    cvAnimationPlayed = true;
+                    animateCVSamples();
+                    cvObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+
+        cvObserver.observe(cvSamplesContainer);
+    }
+
+    // Observer for Cover Letter samples
+    if (clSamplesContainer) {
+        const clObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !clAnimationPlayed) {
+                    clAnimationPlayed = true;
+                    animateCLSamples();
+                    clObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+
+        clObserver.observe(clSamplesContainer);
+    }
+
+    function animateCVSamples() {
+        const cvSamples = document.querySelectorAll('.cv-sample');
+        cvSamples.forEach((sample, index) => {
+            const delay = parseInt(sample.getAttribute('data-delay')) || index * 200;
+            setTimeout(() => {
+                sample.classList.add('animate-in');
+            }, delay);
+        });
+    }
+
+    function animateCLSamples() {
+        const clSamples = document.querySelectorAll('.cl-sample');
+        clSamples.forEach((sample, index) => {
+            const delay = parseInt(sample.getAttribute('data-delay')) || index * 200;
+            setTimeout(() => {
+                sample.classList.add('animate-in');
+            }, delay);
+        });
+    }
+}
+
 // Initialize on DOM load
 document.addEventListener('DOMContentLoaded', () => {
     // Add any initialization code here
@@ -659,6 +720,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initJobSearchChat();
     initTypingEffect();
     initJobTrackerAnimation();
+    initCVCLAnimations();
 
     // Initialize GA4 tracking
     initGA4Tracking();
