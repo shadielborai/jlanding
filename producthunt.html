@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="78% of resumes never reach humans. Jobesta is an AI-powered platform that beats ATS systems so your resume gets read. Free forever.">
+    <meta name="keywords" content="ATS resume, job search, applicant tracking system, AI CV builder, free resume builder, job application">
+    <meta name="author" content="Jobesta">
+    <title>Jobesta - Beat the ATS Black Hole | Product Hunt Launch</title>
+    <link rel="canonical" href="https://jobesta.com/producthunt.html">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Jobesta - Beat the ATS Black Hole">
+    <meta property="og:description" content="78% of resumes never reach humans. We're fixing that with AI-powered ATS optimization. Free forever.">
+    <meta property="og:image" content="https://jobesta.com/images/og-image.png">
+    <meta property="og:url" content="https://jobesta.com/producthunt.html">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Jobesta - Beat the ATS Black Hole">
+    <meta name="twitter:description" content="AI-powered job search that beats Applicant Tracking Systems">
+    <meta name="twitter:image" content="https://jobesta.com/images/twitter-card.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/producthunt.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="images/fav/favicon_16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/fav/favicon_32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="images/fav/favicon_48.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="images/fav/favicon_192.png">
+    <link rel="apple-touch-icon" sizes="256x256" href="images/fav/favicon_256.png">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PNTVD903V0"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      // Set default consent to denied for EU compliance
+      gtag('consent', 'default', {
+        'analytics_storage': 'denied',
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied'
+      });
+
+      // Update consent to granted for analytics only (cookie-less mode)
+      gtag('consent', 'update', {
+        'analytics_storage': 'granted'
+      });
+
+      // Configure with IP anonymization and disabled ad personalization
+      gtag('config', 'G-PNTVD903V0', {
+        'anonymize_ip': true,
+        'allow_ad_personalization_signals': false
+      });
+    </script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav-wrapper">
+                <a href="index.html" class="logo">
+                    <span class="logo-bold">Job</span><span class="logo-light">esta</span>
+                </a>
+                <ul class="nav-menu">
+                    <li><a href="index.html#features" class="nav-link">Features</a></li>
+                    <li><a href="pricing.html" class="nav-link">Pricing</a></li>
+                    <li><a href="blog.html" class="nav-link">Blog</a></li>
+                    <li><a href="about.html" class="nav-link">About Us</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                    <li><a href="https://app.jobesta.com/login" class="btn btn-primary">Try Free</a></li>
+                </ul>
+                <div class="mobile-menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="ph-hero">
+        <div class="container">
+            <!-- ProductHunt Badge -->
+            <div class="ph-badge-container">
+                <span class="ph-launch-badge">🚀 Launching on Product Hunt Today!</span>
+                <a href="https://www.producthunt.com/posts/jobesta" target="_blank" rel="noopener" class="ph-badge-link">
+                    <img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=YOUR_POST_ID&theme=light"
+                         alt="Jobesta - Beat the ATS black hole | Product Hunt"
+                         width="250"
+                         height="54" />
+                </a>
+            </div>
+
+            <div class="ph-hero-content">
+                <div class="ph-hero-text">
+                    <h1 class="ph-hero-title">78% of Resumes Never Reach Humans. We're Fixing That.</h1>
+                    <p class="ph-hero-subtitle">Your all-in-one platform for career growth. Search millions of jobs, generate ATS-friendly CVs and cover letters in seconds, polish your profile with AI, and track every application—all powered by cutting-edge AI. Everything you need to land your dream job, free forever.</p>
+
+                    <div class="ph-trust-badges">
+                        <span class="ph-trust-item">✓ Free Forever</span>
+                        <span class="ph-trust-item">✓ No Credit Card</span>
+                        <span class="ph-trust-item">✓ ATS-Optimized</span>
+                    </div>
+
+                    <div class="ph-cta-group">
+                        <a href="https://app.jobesta.com/login" class="btn btn-primary btn-large">
+                            🚀 Try Jobesta Free
+                        </a>
+                        <a href="https://www.producthunt.com/posts/jobesta" target="_blank" rel="noopener" class="btn btn-secondary btn-large">
+                            💬 Support Our Launch
+                        </a>
+                    </div>
+                </div>
+
+                <div class="ph-hero-visual">
+                    <div class="ph-cv-showcase" id="phCVShowcase">
+                        <div class="ph-cv-stack">
+                            <div class="ph-cv-item ph-cv-item-1">
+                                <img src="https://jobesta.com/images/samples/cv-modern.webp" alt="Modern ATS-Optimized CV" width="240" height="339" loading="eager">
+                            </div>
+                            <div class="ph-cv-item ph-cv-item-2">
+                                <img src="https://jobesta.com/images/samples/cv-faang.webp" alt="FAANG ATS-Optimized CV" width="240" height="339" loading="eager">
+                            </div>
+                            <div class="ph-cv-item ph-cv-item-3">
+                                <img src="https://jobesta.com/images/samples/cv-minamlist.webp" alt="Minimalist ATS-Optimized CV" width="240" height="339" loading="eager">
+                            </div>
+                        </div>
+                        <p style="text-align: center; margin-top: 1.5rem; color: var(--jobesta-gray-60); font-size: 0.875rem; font-weight: 500;">ATS-Optimized Resume Examples</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Job Search Section -->
+    <section class="section ph-ai-search">
+        <div class="container">
+            <div class="ph-section-header">
+                <h2>AI-Powered Job Search That Actually Works</h2>
+                <p class="ph-section-subtitle">Stop scrolling through irrelevant listings. Let AI find your perfect match from millions of opportunities worldwide.</p>
+            </div>
+
+            <div class="ph-ai-search-grid">
+                <!-- Feature 1: Smart Matching -->
+                <div class="ph-ai-card">
+                    <div class="ph-ai-icon">
+                        <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+                            <circle cx="28" cy="28" r="28" fill="#EBF5FF"/>
+                            <path d="M28 16C22.4772 16 18 20.4772 18 26C18 31.5228 22.4772 36 28 36C33.5228 36 38 31.5228 38 26C38 20.4772 33.5228 16 28 16Z" fill="#0A66C2"/>
+                            <path d="M40 38L36 34" stroke="#0A66C2" stroke-width="3" stroke-linecap="round"/>
+                            <circle cx="28" cy="26" r="4" fill="white"/>
+                        </svg>
+                    </div>
+                    <h3>Smart Job Matching</h3>
+                    <p>Our AI analyzes your profile, skills, and career goals to match you with jobs that truly fit—no more endless scrolling through irrelevant listings.</p>
+                </div>
+
+                <!-- Feature 2: Personalized Matches -->
+                <div class="ph-ai-card">
+                    <div class="ph-ai-icon">
+                        <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+                            <circle cx="28" cy="28" r="28" fill="#EBF5FF"/>
+                            <circle cx="28" cy="28" r="12" stroke="#0A66C2" stroke-width="2.5" fill="none"/>
+                            <circle cx="28" cy="28" r="6" fill="#0A66C2"/>
+                            <circle cx="20" cy="20" r="3" fill="#0A66C2" opacity="0.6"/>
+                            <circle cx="36" cy="20" r="3" fill="#0A66C2" opacity="0.6"/>
+                            <circle cx="36" cy="36" r="3" fill="#0A66C2" opacity="0.6"/>
+                            <circle cx="20" cy="36" r="3" fill="#0A66C2" opacity="0.6"/>
+                        </svg>
+                    </div>
+                    <h3>Millions of Opportunities</h3>
+                    <p>Access personalized job recommendations from millions of opportunities worldwide. Fresh matches delivered daily based on your preferences.</p>
+                </div>
+
+                <!-- Feature 3: Job Notifications -->
+                <div class="ph-ai-card">
+                    <div class="ph-ai-icon">
+                        <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+                            <circle cx="28" cy="28" r="28" fill="#EBF5FF"/>
+                            <path d="M18 24h20v12H18z" fill="none" stroke="#0A66C2" stroke-width="2.5" stroke-linejoin="round"/>
+                            <path d="M18 24l10 6 10-6" fill="none" stroke="#0A66C2" stroke-width="2.5" stroke-linejoin="round"/>
+                            <circle cx="38" cy="20" r="4" fill="#16A34A"/>
+                        </svg>
+                    </div>
+                    <h3>Instant Job Alerts</h3>
+                    <p>Get notified the moment new opportunities matching your criteria are posted. Never miss your dream job again.</p>
+                </div>
+            </div>
+
+            <div class="ph-ai-cta">
+                <a href="https://app.jobesta.com/login" class="btn btn-primary btn-large">Start Finding Jobs with AI</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Timeline Section -->
+    <section class="section ph-timeline">
+        <div class="container">
+            <div class="ph-section-header">
+                <h2>How to Use Jobesta</h2>
+                <p class="ph-section-subtitle">Land your dream job in 6 strategic steps—from signup to signed offer</p>
+            </div>
+
+            <div class="ph-timeline-wrapper">
+                <!-- Step 1 -->
+                <div class="ph-timeline-item">
+                    <div class="ph-timeline-number">
+                        <span>1</span>
+                    </div>
+                    <div class="ph-timeline-content">
+                        <h3>Create Your Free Account</h3>
+                        <p>Sign up in under 60 seconds. No credit card required, no trial period—just instant access to all free features.</p>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="ph-timeline-item">
+                    <div class="ph-timeline-number">
+                        <span>2</span>
+                    </div>
+                    <div class="ph-timeline-content">
+                        <h3>Upload Your Existing CV</h3>
+                        <p>Import your current resume or create one from scratch. We support all major file formats and LinkedIn imports.</p>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="ph-timeline-item">
+                    <div class="ph-timeline-number">
+                        <span>3</span>
+                    </div>
+                    <div class="ph-timeline-content">
+                        <h3>Enhance & Polish with AI</h3>
+                        <p>Our AI analyzes your experience and suggests improvements to make your CV stand out. Better wording, stronger achievements, optimized formatting.</p>
+                    </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="ph-timeline-item">
+                    <div class="ph-timeline-number">
+                        <span>4</span>
+                    </div>
+                    <div class="ph-timeline-content">
+                        <h3>Find Perfect Jobs with AI</h3>
+                        <p>Search millions of opportunities worldwide. Our AI matches you with jobs that truly fit your skills and career goals—no endless scrolling.</p>
+                    </div>
+                </div>
+
+                <!-- Step 5 -->
+                <div class="ph-timeline-item">
+                    <div class="ph-timeline-number">
+                        <span>5</span>
+                    </div>
+                    <div class="ph-timeline-content">
+                        <h3>Generate Tailored CV & Cover Letter</h3>
+                        <p>For each job you apply to, Jobesta creates an ATS-optimized CV and personalized cover letter in seconds—tailored to that specific role.</p>
+                    </div>
+                </div>
+
+                <!-- Step 6 -->
+                <div class="ph-timeline-item">
+                    <div class="ph-timeline-number">
+                        <span>6</span>
+                    </div>
+                    <div class="ph-timeline-content">
+                        <h3>Track Your Applications</h3>
+                        <p>Keep all your applications organized in one place. Track where you've applied, update statuses as you progress, set follow-up reminders, and more—so you always know exactly where you stand.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ph-timeline-cta">
+                <a href="https://app.jobesta.com/login" class="btn btn-primary btn-large">Start Your Journey Free</a>
+                <p class="ph-timeline-cta-note">✓ Free Forever • ✓ No Credit Card • ✓ Ready in 60 Seconds</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Founder Section -->
+    <section class="section ph-founder">
+        <div class="container">
+            <div class="ph-founder-card">
+                <div class="ph-founder-avatar">
+                    <img src="images/producthunt/avatar.jpg" alt="Gebreil S. - Jobesta Founder" width="120" height="120" loading="lazy">
+                </div>
+
+                <div class="ph-founder-content">
+                    <h2>👋 Hi Product Hunt! I'm Gebreil S.</h2>
+
+                    <p>I built Jobesta because job hunting today feels like playing a rigged game. It's not just about finding the right opportunities—it's about getting past the robots first.</p>
+
+                    <p>Here's what most people don't know: when you apply to multiple jobs at the same company, the ATS shows recruiters <em>every single position</em> you've applied for. Apply to a marketing role and a finance role? You just raised a red flag and tanked your chances at both.</p>
+
+                    <p>On top of that, crafting an ATS-friendly CV that actually highlights the <em>right</em> experience for each job? That's a full-time job in itself.</p>
+
+                    <p>So I built Jobesta as an <strong>all-in-one platform</strong> that handles the entire journey:</p>
+
+                    <ul style="margin: 1.5rem 0; padding-left: 1.5rem; color: var(--jobesta-gray-80); font-size: 1.125rem; line-height: 1.8;">
+                        <li><strong>Real-time job search</strong> across millions of opportunities worldwide</li>
+                        <li><strong>AI-powered profile polish</strong> to make your experience sound more professional</li>
+                        <li><strong>Instant CV & cover letter generation</strong> tailored to each job in seconds—focusing only on relevant experience</li>
+                        <li><strong>Smart job tracking</strong> to prevent the "applied to everything" red flag that kills your credibility</li>
+                    </ul>
+
+                    <p>Job search shouldn't be this hard. Jobesta makes it feel like you finally have someone in your corner.</p>
+
+                    <div class="ph-founder-highlights">
+                        <h3>🎯 What makes Jobesta different:</h3>
+                        <ul>
+                            <li>Built for job seekers, not recruiters</li>
+                            <li>ATS optimization is core, not optional</li>
+                            <li>Free tier that doesn't expire (seriously)</li>
+                        </ul>
+                    </div>
+
+                    <p class="ph-founder-cta-text">Ask me anything in the comments! I'll be here all day answering questions about ATS, our tech stack, and what's next for Jobesta.</p>
+
+                    <div class="ph-founder-links">
+                        <a href="https://www.producthunt.com/posts/jobesta#comments" target="_blank" rel="noopener" class="btn btn-primary">
+                            Ask Me Anything on Product Hunt →
+                        </a>
+                        <div class="ph-social-links">
+                            <span style="color: var(--jobesta-gray-60); margin-right: 1rem;">Connect:</span>
+                            <a href="https://www.linkedin.com/company/jobesta/" target="_blank" rel="noopener">LinkedIn</a>
+                        </div>
+                    </div>
+
+                    <p style="margin-top: 2rem; color: var(--jobesta-gray-70); font-style: italic;">Let's fix job search together 🚀</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="section ph-faq">
+        <div class="container">
+            <div class="ph-section-header">
+                <h2>Frequently Asked Questions</h2>
+            </div>
+
+            <div class="ph-faq-grid">
+                <!-- FAQ 1 -->
+                <details class="ph-faq-item">
+                    <summary>
+                        <span class="ph-faq-icon">❓</span>
+                        <span class="ph-faq-question">Why is Jobesta free?</span>
+                    </summary>
+                    <div class="ph-faq-answer">
+                        <span class="ph-faq-icon-answer">💡</span>
+                        <p>We use a freemium model. Free tier gives you 3 ATS-optimized CVs per month, which renews forever. Premium ($20/mo) increases the limits drastically. We believe everyone deserves access to ATS-optimized tools, not just people who can afford expensive career coaches.</p>
+                    </div>
+                </details>
+
+                <!-- FAQ 2 -->
+                <details class="ph-faq-item">
+                    <summary>
+                        <span class="ph-faq-icon">❓</span>
+                        <span class="ph-faq-question">How is this different from competitors?</span>
+                    </summary>
+                    <div class="ph-faq-answer">
+                        <span class="ph-faq-icon-answer">💡</span>
+                        <p>Three ways:</p>
+                        <ol>
+                            <li>ATS optimization is built into every CV, not optional</li>
+                            <li>Free tier is forever, not a 14-day trial that expires</li>
+                            <li>Our AI matches context and requirements, not just keyword density</li>
+                        </ol>
+                    </div>
+                </details>
+
+                <!-- FAQ 3 -->
+                <details class="ph-faq-item">
+                    <summary>
+                        <span class="ph-faq-icon">❓</span>
+                        <span class="ph-faq-question">What's your roadmap?</span>
+                    </summary>
+                    <div class="ph-faq-answer">
+                        <span class="ph-faq-icon-answer">💡</span>
+                        <p>Next 3 months: Interview prep AI, LinkedIn profile optimizer, salary negotiation assistant. What would you like to see? Drop ideas in the PH comments!</p>
+                    </div>
+                </details>
+
+                <!-- FAQ 4 -->
+                <details class="ph-faq-item">
+                    <summary>
+                        <span class="ph-faq-icon">❓</span>
+                        <span class="ph-faq-question">Is my data secure?</span>
+                    </summary>
+                    <div class="ph-faq-answer">
+                        <span class="ph-faq-icon-answer">💡</span>
+                        <p>Yes. We're GDPR compliant. Your CV data is encrypted and never sold to recruiters or third parties. Full <a href="privacy.html">privacy policy here</a>.</p>
+                    </div>
+                </details>
+
+                <!-- FAQ 5 -->
+                <details class="ph-faq-item">
+                    <summary>
+                        <span class="ph-faq-icon">❓</span>
+                        <span class="ph-faq-question">Can I suggest features?</span>
+                    </summary>
+                    <div class="ph-faq-answer">
+                        <span class="ph-faq-icon-answer">💡</span>
+                        <p>Absolutely! We're building for the community. Drop ideas in PH comments or email <a href="mailto:support@jobesta.com">support@jobesta.com</a></p>
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section class="section ph-final-cta">
+        <div class="container">
+            <div class="ph-cta-box">
+                <h2>Ready to Beat the ATS and Land Interviews?</h2>
+                <p>Join hundreds of job seekers who are using Jobesta to find better jobs faster.</p>
+
+                <div class="ph-cta-buttons">
+                    <a href="https://app.jobesta.com/login" class="btn btn-primary btn-large">
+                        Start Free (No Credit Card)
+                    </a>
+                    <a href="https://www.producthunt.com/posts/jobesta" target="_blank" rel="noopener" class="btn btn-secondary btn-large">
+                        Support Our PH Launch
+                    </a>
+                </div>
+
+                <p class="ph-cta-subtext">✓ Free Forever • ✓ 3 ATS CVs/Month • ✓ No Trial Expiration</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3><span style="font-weight: 900;">Job</span><span style="font-weight: 200;">esta</span></h3>
+                    <p>AI-Powered Career Growth • Start in 60 Seconds</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="blog.html">Blogs</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Features</h3>
+                    <ul class="footer-links">
+                        <li><a href="cv.html">CV Generator</a></li>
+                        <li><a href="cover-letter.html">Cover Letter Generator</a></li>
+                        <li><a href="search-jobs.html">Search Jobs</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Compliance</h3>
+                    <ul class="footer-links">
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Newsletter</h3>
+                    <p>Stay updated with the latest job search tips and features</p>
+                    <form class="newsletter-form" id="newsletterForm">
+                        <input type="email" class="newsletter-input" placeholder="Enter your email" id="newsletterEmail">
+                        <button type="submit" class="newsletter-btn" id="newsletterBtn" disabled>Subscribe</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Trust Badges -->
+            <div class="trust-badges">
+                <div class="trust-item">
+                    <svg class="trust-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2L3 7V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M9 12L11 14L15 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <p>Your Data Stays Private</p>
+                </div>
+                <div class="trust-item">
+                    <svg class="trust-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="2"/>
+                        <path d="M12 8V12L14.5 13.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    <p>GDPR Compliant</p>
+                </div>
+                <div class="trust-item">
+                    <svg class="trust-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <p>AI-Powered Matching</p>
+                </div>
+                <div class="trust-item">
+                    <svg class="trust-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20.84 4.61C20.3292 4.09913 19.7228 3.69364 19.0554 3.41708C18.3879 3.14052 17.6725 2.99817 16.95 2.99817C16.2275 2.99817 15.5121 3.14052 14.8446 3.41708C14.1772 3.69364 13.5708 4.09913 13.06 4.61L12 5.67L10.94 4.61C9.9083 3.57831 8.50903 3.00013 7.05 3.00013C5.59096 3.00013 4.19169 3.57831 3.16 4.61C2.1283 5.64169 1.55012 7.04096 1.55012 8.5C1.55012 9.95903 2.1283 11.3583 3.16 12.39L4.22 13.45L12 21.23L19.78 13.45L20.84 12.39C21.3509 11.8792 21.7564 11.2728 22.0329 10.6054C22.3095 9.93789 22.4518 9.22249 22.4518 8.5C22.4518 7.77751 22.3095 7.0621 22.0329 6.39464C21.7564 5.72718 21.3509 5.12075 20.84 4.61V4.61Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <p>Free Tier Forever</p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2025 Jobesta, All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Main JavaScript -->
+    <script src="js/main.js"></script>
+    <script src="js/producthunt.js"></script>
+</body>
+</html>
