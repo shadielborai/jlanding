@@ -75,6 +75,12 @@
     
     <!-- Blog Posts - Example entries (update these with actual blog posts) -->
     <url>
+        <loc>https://jobesta.com/blog/how-to-follow-up-after-interview.html</loc>
+        <lastmod>2026-07-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
         <loc>https://jobesta.com/blog/how-to-negotiate-salary.html</loc>
         <lastmod>2026-07-19</lastmod>
         <changefreq>monthly</changefreq>
